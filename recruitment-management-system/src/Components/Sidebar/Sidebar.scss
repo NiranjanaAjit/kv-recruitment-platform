@@ -1,0 +1,74 @@
+.sideBarContainer{
+    width: 100px;
+    background: #ffffff;
+    position: fixed;
+    box-shadow: 1px 0px 10px 5px rgba(0, 0, 0, 0.05);
+    transition-duration: 0.5s;
+    height: 100vh;
+
+    .sideBarButtons{
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .sideBarButtonIcons{
+        color: #00897B;
+        font-size: 30px;
+    }
+
+    .sideBarButtonsContainer{
+        margin-top: 150px;
+    }
+
+    .sideBarButtons:hover {
+        background: #00897B;
+        width: 103%;
+        border-radius: 0px 3px 3px 0px;
+
+        .sideBarButtonIcons{
+            color: #ffffff;
+           
+        }
+        .sideBarButtonLabels{
+            color: #ffffff;
+            transition-duration: 0.5s;
+
+           
+        }
+
+    }
+    .sideBarButtonLabels{
+        display: none;
+
+    }
+}
+
+.sideBarContainer:hover{
+    width: 250px;
+    transition-duration: 0.5s;
+
+    .sideBarButtonLabels{
+        color: var(--primary-color);
+        display: block;
+        margin-left: 10px;
+        transition-duration: 0.5s;
+
+    }
+
+    .sideBarButtons{
+        justify-content: left;
+        transition-duration: 0.2s;
+
+    }
+
+    .sideBarButtonIcons{
+        margin-left: 30px;
+        transition-duration: 0.5s;
+
+    }
+
+}
