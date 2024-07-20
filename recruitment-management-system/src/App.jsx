@@ -1,6 +1,7 @@
 import HomeLayout from "./Pages/HomeLayout/HomeLayout";
 import "../src/App.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import JobDetails from "./Pages/JobDetails/JobDetails";
 
 function App() {
   const route = createBrowserRouter([
@@ -15,7 +16,15 @@ function App() {
       path: "/", //CHANGES:  Path needs to be Changed
       element: <HomeLayout />,
 
-      // ADDITION : children: Needs to be added
+      children: [
+        // {
+        //   index: true,
+        //   element: <JobList />,
+        // },
+        { path: "jobDetails", element: <JobDetails /> },
+        // { path: "edit/:id", element: <EditEmployee /> },
+        // { path: "details/:id", element: <EmployeeDetails /> },
+      ],
     },
   ]);
 

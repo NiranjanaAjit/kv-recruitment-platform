@@ -1,0 +1,13 @@
+:root {
+  --dark_blue: #1c212d;
+  --yellow_color: #ffd831;
+  --main_background_off_grey: #f3f6f9;
+  --green_button: #346865;
+}
+
+.jobdetail {
+  position: relative;
+  background-color: var(--main_background_off_grey);
+  width: 100%;
+  height: 100%;
+}
