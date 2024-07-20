@@ -5,6 +5,7 @@ import KvLogo from "../../assets/kv-logo.png";
 import Logo from "../../assets/kv-login.jpeg";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { roleEnum } from "../../utils/role.enum";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,11 +20,14 @@ const Login = () => {
     password: "",
   });
 
-  const onLogin = async (e) => {
+  const onLogin = (e) => {
     console.log(loginCredential);
     e.preventDefault();
-    localStorage.setItem("token", "true");
-    navigate("/dashboard");
+    const role = roleEnum.NORMAL_USER;
+    localStorage.setItem("accessToken", "true");
+    localStorage.setItem("role", role);
+    if (role === roleEnum.ADMIN) navigate("/admin");
+    else navigate("/employee");
   };
 
   useEffect(() => {
@@ -70,7 +74,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              onChange={(e) => handleChange(e, 10)}
+              onChange={(e) => handleChange(e, 20)}
               value={loginCredential.username}
               error={errors.email}
               ref={usernameRef}
