@@ -1,20 +1,21 @@
-import HomeLayout from "./Pages/HomeLayout/HomeLayout";
+import HomeLayout from "./pages/HomeLayout/HomeLayout";
 import "../src/App.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const route = createBrowserRouter([
     {
       //ADDITION : Login Page and assign
-      // path: "/",
-      // element: <Login />,
-      // errorElement: <ErrorPage />,
+      path: "/",
+      element: <Login />,
+      // errorElement: <NotFound />,
     },
 
     {
-      path: "/", //CHANGES:  Path needs to be Changed
+      path: "/dashboard", //CHANGES:  Path needs to be Changed
       element: <HomeLayout />,
-
       // ADDITION : children: Needs to be added
     },
   ]);
