@@ -12,7 +12,10 @@ const JobDetails = () => {
     updatedAt: null,
     deletedAt: null,
     noOfOpenings: 2,
+    skills: { name: ["python", "java", "django", "numpy"] },
   };
+
+  const skills = jobDetail.skills;
 
   return (
     <main className="jobdetail">
@@ -22,16 +25,31 @@ const JobDetails = () => {
           <div className="status">Active</div>
         </div>
         <div className="header--buttons">
-          <Button text="Refer a Friend"></Button>
-          <Button text="Edit"></Button>
-          <Button text="Delete"></Button>
+          <Button className="refer--button" text="Refer a Friend"></Button>
+          <Button className="edit--button" text="Edit"></Button>
+          <Button className="delete--button" text="Delete"></Button>
         </div>
       </div>
       <div className="jobdetail--details">
-        <div className="jobdetail--details--description">
-          <h3>Job Description</h3>
-          {jobDetail.description}
+        <div className="jobdetail--details--main">
+          <div className="description">
+            <h3>Job Description</h3>
+            {jobDetail.description}
+          </div>
+          <div className="skills">
+            <h3>Skills</h3>
+            <ul>
+              {skills.name.map((value) => {
+                return (
+                  <>
+                    <li>{value}</li>
+                  </>
+                );
+              })}
+            </ul>
+          </div>
         </div>
+
         <div className="jobdetail--details--detail--tile">
           <h3>Job Details</h3>
           <div className="jobdetail--details--detail--tile--createdAt ">

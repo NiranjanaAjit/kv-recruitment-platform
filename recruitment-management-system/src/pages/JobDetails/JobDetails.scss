@@ -3,6 +3,7 @@
   --yellow_color: #ffd831;
   --main_background_off_grey: #f3f6f9;
   --green_button: #346865;
+  --delete_button: #e14f4f;
 }
 
 .jobdetail {
@@ -23,6 +24,32 @@
       display: flex;
       flex-direction: row;
       gap: 20px;
+
+      .refer--button {
+        background-color: var(--main_background_off_grey);
+        border: 3px solid var(--green_button);
+        padding: 10px;
+        color: var(--green_button);
+        font-weight: bold;
+      }
+
+      .edit--button {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border: 3px solid var(--green_button);
+        padding: 10px;
+        font-weight: bold;
+        width: 100px;
+      }
+
+      .delete--button {
+        background-color: var(--delete_button);
+        color: #ffffff;
+        border: 3px solid #d11a2a;
+        padding: 10px;
+        font-weight: bold;
+        width: 100px;
+      }
     }
   }
 
@@ -33,10 +60,13 @@
     position: relative;
     flex-direction: row;
 
-    .jobdetail--details--description {
+    .jobdetail--details--main {
       width: 60%;
       background-color: #ffffff;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
     }
 
     .jobdetail--details--detail--tile {
