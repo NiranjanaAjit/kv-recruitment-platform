@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import "../HomeLayout/HomeLayout.scss";
-const HomeLayout = () => {
+import "./AdminHomeLayout.scss";
+const AdminHomeLayout = () => {
   return (
     <>
       <div className="homeLayoutContainer">
@@ -12,4 +12,4 @@ const HomeLayout = () => {
   );
 };
 
-export default HomeLayout;
+export default AdminHomeLayout;

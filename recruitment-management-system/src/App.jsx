@@ -31,10 +31,9 @@ function App() {
   ]);
 
   return (
-    <>
-      <RouterProvider router={route}></RouterProvider>
-    </>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   );
 }
-
 export default App;
