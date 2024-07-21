@@ -15,6 +15,7 @@ import EmployeeDashboard from "./pages/EmployeeDashboard/EmployeeDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import AdminJobDetails from "./pages/AdminJobDetails/AdminJobDetails";
 import EmployeeJobDetails from "./pages/EmployeeJobDetails/EmployeeJobDetails";
+import EmployeeList from "./pages/EmployeeList/EmployeeList";
 
 function Router() {
   const dispatch = useDispatch();
@@ -54,6 +55,10 @@ function Router() {
             {
               path: "jobDetails",
               element: <EmployeeJobDetails />,
+            },
+            {
+              path: "employeeList",
+              element: <EmployeeList />,
             },
           ],
         },

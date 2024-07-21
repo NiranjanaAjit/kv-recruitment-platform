@@ -14,6 +14,7 @@ const AdminJobDetails = () => {
     createdAt: "2024-07-20",
     noOfOpenings: 2,
     skills: { name: ["python", "java", "django", "numpy"] },
+    active: true,
   };
 
   // const jobTileDetail = jobDetail.filter(
@@ -44,7 +45,9 @@ const AdminJobDetails = () => {
             {<MdLocationOn size={20} />}
             {jobDetail.location}
           </div>
-          <div className="heder--status">Active</div>
+          <div className="heder--status">
+            {jobDetail.active ? "Active" : "Inactive"}
+          </div>
         </div>
         <div className="header--buttons">
           <Button
