@@ -1,6 +1,6 @@
 .side-bar-container {
   width: 100px;
-  background: #ffffff;
+  background: var(--primary-dark-blue);
   position: fixed;
   box-shadow: 1px 0px 10px 5px rgba(0, 0, 0, 0.05);
   transition-duration: 0.5s;
@@ -15,7 +15,7 @@
   }
 
   .side-bar__button__icons {
-    color: #00897b;
+    color: var(--yellow);
     font-size: 30px;
   }
 
@@ -24,15 +24,15 @@
   }
 
   .side-bar__buttons:hover {
-    background: #00897b;
+    background: var(--yellow);
     width: 103%;
     border-radius: 0px 3px 3px 0px;
 
     .side-bar__button__icons {
-      color: #ffffff;
+      color: var(--primary-dark-blue);
     }
     .side-bar__button__labels {
-      color: #ffffff;
+      color: var(--primary-dark-blue);
       transition-duration: 0.5s;
     }
   }
@@ -46,7 +46,7 @@
   transition-duration: 0.5s;
 
   .side-bar__button__labels {
-    color: var(--primary-color);
+    color: var(--yellow);
     display: block;
     margin-left: 10px;
     transition-duration: 0.5s;

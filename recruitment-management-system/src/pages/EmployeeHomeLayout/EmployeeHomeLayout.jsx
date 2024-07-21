@@ -4,6 +4,9 @@ const EmployeeHomeLayout = () => {
   return (
     <div className="home-layout-container">
       <Sidebar />
+      <div className="home-layout-content">
+        <div className="blank-header"></div>
+      </div>
     </div>
   );
 };
