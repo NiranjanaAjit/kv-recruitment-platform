@@ -14,16 +14,29 @@
   padding: 20px;
   left: 100px;
 
+  .jobdetail--header,
+  .jobdetail--details {
+    width: 90%;
+  }
   .jobdetail--header {
-    width: 75%;
     padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    height: fit-content;
+    flex-wrap: wrap;
+
+    .header--title {
+      .header--location {
+        display: flex;
+        align-items: center;
+      }
+    }
 
     .header--buttons {
       display: flex;
       flex-direction: row;
       gap: 20px;
+      height: 50px;
 
       .refer--button {
         background-color: var(--main_background_off_grey);
@@ -40,6 +53,9 @@
         padding: 10px;
         font-weight: bold;
         width: 100px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
       }
 
       .delete--button {
@@ -49,6 +65,9 @@
         padding: 10px;
         font-weight: bold;
         width: 100px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
       }
     }
   }
@@ -59,18 +78,39 @@
     gap: 50px;
     position: relative;
     flex-direction: row;
+    justify-content: space-between;
 
     .jobdetail--details--main {
-      width: 60%;
+      width: calc(100% - 450px);
       background-color: #ffffff;
       padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 50px;
+
+      .skill--list {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .skills--span {
+          display: inline-flex;
+          width: 95%;
+          padding: 3px;
+          position: relative;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          max-width: 100px;
+          text-overflow: ellipsis;
+          background-color: var(--main_background_off_grey);
+          border-radius: 15px;
+        }
+      }
     }
 
     .jobdetail--details--detail--tile {
-      width: 200px;
+      width: 400px;
       background-color: #ffffff;
       position: relative;
       display: flex;
