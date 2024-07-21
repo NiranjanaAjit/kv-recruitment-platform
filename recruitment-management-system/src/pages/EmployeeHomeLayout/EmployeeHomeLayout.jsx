@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./EmployeeHomeLayout.scss";
 const EmployeeHomeLayout = () => {
@@ -6,6 +7,7 @@ const EmployeeHomeLayout = () => {
       <Sidebar />
       <div className="home-layout-content">
         <div className="blank-header"></div>
+        <Outlet/>
       </div>
     </div>
   );
