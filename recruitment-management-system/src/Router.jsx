@@ -56,10 +56,6 @@ function Router() {
               path: "jobDetails",
               element: <EmployeeJobDetails />,
             },
-            {
-              path: "employeeList",
-              element: <EmployeeList />,
-            },
           ],
         },
       ],
@@ -79,6 +75,10 @@ function Router() {
             {
               path: "jobDetails",
               element: <AdminJobDetails />,
+            },
+            {
+              path: "employeeList",
+              element: <EmployeeList />,
             },
           ],
         },

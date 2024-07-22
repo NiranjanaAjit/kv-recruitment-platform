@@ -2,9 +2,6 @@ import "./GridRows.scss";
 
 const GridRows = (props) => {
   const color = props.color;
-  console.log(color);
-  console.log(props.Headers);
-  console.log(props.Details);
 
   return (
     <>
@@ -18,23 +15,16 @@ const GridRows = (props) => {
           }}
         >
           {Object.keys(props.Headers).map((options) => {
-            if (options != "address" && options != "email") {
-              return (
-                <>
-                  <span className="data--span">{props.Headers[options]}</span>
-                </>
-              );
-            }
+            return (
+              <span className="data--span" key={props.Headers[options]}>
+                {props.Headers[options]}
+              </span> 
+            );
           })}
         </div>
         <br />
         <div className="data--details">
-          {console.log(props.Details)}{" "}
           {props.Details.map((value) => {
-            {
-              console.log(Object.keys(props.Headers).length);
-            }
-
             return (
               <div
                 className="data--rows"
@@ -46,27 +36,25 @@ const GridRows = (props) => {
                 onClick={(e) => {
                   onSelect(e, value.id);
                 }}
+                key={value.id}
               >
                 {Object.keys(props.Headers).map((options) => {
-                  console.log(options, "options");
                   if (value[options]) {
-                    console.log(options, props.Headers, value[options]);
                     return (
                       <span
-                        className={color.options ? color.options : "data--span"}
+                        className={
+                          color[value[options]]
+                            ? color[value[options]]
+                            : "data--span"
+                        }
+                        key={value[options]}
                       >
                         {value[options]}
                       </span>
                     );
-                  } else {
-                    return (
-                      <>
-                        <span className="data--span"></span>
-                      </>
-                    );
                   }
                 })}
-                {props.actions()}
+                {props.actions(value.id) ? props.actions(value.id) : {}}
               </div>
             );
           })}

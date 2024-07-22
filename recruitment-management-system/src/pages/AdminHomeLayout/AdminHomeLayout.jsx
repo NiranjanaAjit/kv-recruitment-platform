@@ -5,8 +5,11 @@ const AdminHomeLayout = () => {
   return (
     <>
       <div className="homeLayoutContainer">
-        <Sidebar></Sidebar>
-        <Outlet />
+        <Sidebar />
+        <div className="home-layout-content">
+          <div className="blank-header"></div>
+          <Outlet />
+        </div>
       </div>
     </>
   );

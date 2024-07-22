@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import { MdDelete } from "react-icons/md";
 import { MdEditSquare } from "react-icons/md";
 import { MdLocationOn } from "react-icons/md";
+import Pill from "../../components/Pill/Pill";
 
 const EmployeeJobDetails = () => {
   const jobDetail = {
@@ -22,14 +23,6 @@ const EmployeeJobDetails = () => {
   // );
 
   const skills = jobDetail.skills;
-
-  const onEdit = () => {
-    //TODO: EDIT MODAL?
-  };
-
-  const onDelete = () => {
-    // TODO: ARE YOU SURE MODAL
-  };
 
   const onRefer = () => {
     // TODO: EMAIL MODAL
@@ -64,11 +57,7 @@ const EmployeeJobDetails = () => {
             <h3>Skills</h3>
             <div className="skill--list">
               {skills.name.map((value) => {
-                return (
-                  <>
-                    <span className="skills--span">{value}</span>
-                  </>
-                );
+                return <Pill value={value} key={value}></Pill>;
               })}
             </div>
           </div>

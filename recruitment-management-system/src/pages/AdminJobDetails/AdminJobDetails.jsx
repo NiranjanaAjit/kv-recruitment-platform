@@ -3,8 +3,12 @@ import Button from "../../components/Button/Button";
 import { MdDelete } from "react-icons/md";
 import { MdEditSquare } from "react-icons/md";
 import { MdLocationOn } from "react-icons/md";
+import Pill from "../../components/Pill/Pill";
+import { useNavigate } from "react-router-dom";
 
 const AdminJobDetails = () => {
+  const navigate = useNavigate();
+
   const jobDetail = {
     title: "Software Engineer",
     description:
@@ -24,8 +28,9 @@ const AdminJobDetails = () => {
 
   const skills = jobDetail.skills;
 
-  const onEdit = () => {
-    //TODO: EDIT MODAL?
+  const onEdit = (id) => {
+    console.log("here");
+    navigate(`edit/${id}`);
   };
 
   const onDelete = () => {
@@ -53,7 +58,7 @@ const AdminJobDetails = () => {
           <Button
             className="refer--button"
             text="Refer a Friend"
-            onClick={onRefer}
+            handleSubmit={onRefer}
           ></Button>
           <Button
             className="edit--button"
@@ -63,7 +68,7 @@ const AdminJobDetails = () => {
                 Edit
               </>
             }
-            onClick={onEdit}
+            handleSubmit={() => onEdit(1)}
           ></Button>
           <Button
             className="delete--button"
@@ -73,7 +78,7 @@ const AdminJobDetails = () => {
                 Close
               </>
             }
-            onClick={onDelete}
+            handleSubmit={onDelete}
           ></Button>
         </div>
       </div>
@@ -87,11 +92,7 @@ const AdminJobDetails = () => {
             <h3>Skills</h3>
             <div className="skill--list">
               {skills.name.map((value) => {
-                return (
-                  <>
-                    <span className="skills--span">{value}</span>
-                  </>
-                );
+                return <Pill value={value} key={value}></Pill>;
               })}
             </div>
           </div>

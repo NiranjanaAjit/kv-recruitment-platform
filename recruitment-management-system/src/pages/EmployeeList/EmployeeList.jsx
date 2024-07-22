@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import GridRows from "../../components/GridRows/GridRows";
+import "./EmployeeList.scss";
+import { MdEditSquare } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const EmployeeList = () => {
   let { id } = useParams();
@@ -21,7 +24,7 @@ const EmployeeList = () => {
       Status: "Probation",
       empExp: 5,
       address: "Location 1",
-      email: "harry@example.com",
+      email: "susan.kurian@example.com",
     },
     {
       name: "Susan Kurian",
@@ -85,8 +88,8 @@ const EmployeeList = () => {
     id: "Employee ID",
     empJD: "Joining Date",
     role: "Role",
-    status: "Status",
-    empAct: "Action",
+    Status: "Status",
+    Action: "Action",
   };
 
   const onClick = (id) => {
@@ -125,28 +128,30 @@ const EmployeeList = () => {
     Inactive: "Inactive",
   };
 
-  const actions = () => {
+  const actions = (id) => {
     return (
       <>
-        <span className="header-options">
-          <div className="action-images">
-            <img
-              alt="Delete Logo"
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowDelete(!showDelete);
-                setEmpId(value.id);
-              }}
-            />
-          </div>
+        <span className="employeelist--row--options" key={id}>
           <div
-            className="action-images"
+            className="employeelist--row--options--edit"
             onClick={(e) => {
               e.stopPropagation();
-              onClick(value.id);
+              onClick(id);
             }}
+            key={id + 1}
           >
-            <img alt="KeyValue Systems logo" />
+            <MdEditSquare key={id} />
+          </div>
+          <div
+            className="employeelist--row--options--delete"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDelete(!showDelete);
+              setEmpId(id);
+            }}
+            key={id}
+          >
+            <MdDelete key={id}></MdDelete>
           </div>
         </span>
       </>
@@ -155,11 +160,12 @@ const EmployeeList = () => {
 
   return (
     <>
-      <main>
-        <div className="content">
-          <div className="jobdetail--header">
+      <main className="employeelist">
+        <div className="employeelist--content">
+          <div className="employeelist--content--header">
             <div className="header--title">
               <h1>Employee List</h1>
+              {/* TODO: ADD FILTER */}
             </div>
           </div>
           <GridRows
@@ -170,6 +176,7 @@ const EmployeeList = () => {
           ></GridRows>
           {showDelete && (
             <>
+              {/* TODO: MODAL IS NOT MADE */}
               <Modal
                 buttonStyle={"white"}
                 onClose={() => {
