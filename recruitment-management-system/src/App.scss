@@ -3,10 +3,14 @@
 :root {
   --primary-color: #00897b;
   --primary-dark-blue : #1C212D;
+  --primary-light-blue :#43506e; 
   --yellow : #FFD831;
   --background-grey : #F3F6F9;
   --green-button : #346865;
   --blue-variant: #03aeee;
+  --font-color-grey: #a3b0c6;
+  --green-light: #f3f8fc;
+  background-color: var(--background-grey);
 }
 * {
   margin: 0;
