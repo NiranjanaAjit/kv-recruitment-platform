@@ -17,6 +17,7 @@ import Referrals from "./pages/Referrals/Referrals";
 import AdminJobDetails from "./pages/AdminJobDetails/AdminJobDetails";
 import EmployeeJobDetails from "./pages/EmployeeJobDetails/EmployeeJobDetails";
 import EmployeeList from "./pages/EmployeeList/EmployeeList";
+import CreateJob from "./pages/CreateJob/CreateJob";
 
 function Router() {
   const dispatch = useDispatch();
@@ -84,6 +85,11 @@ function Router() {
             {
               path: "employeeList",
               element: <EmployeeList />,
+            },
+            ,
+            {
+              path: "create-job",
+              element: <CreateJob />,
             },
           ],
         },
