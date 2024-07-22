@@ -13,6 +13,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import AdminHomeLayout from "./pages/AdminHomeLayout/AdminHomeLayout";
 import EmployeeDashboard from "./pages/EmployeeDashboard/EmployeeDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import Referrals from "./pages/Referrals/Referrals";
 
 function Router() {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function Router() {
             {
               index: true,
               element: <EmployeeDashboard />,
+            },
+            {
+              path: "referrals",
+              element: <Referrals />,
             },
           ],
         },

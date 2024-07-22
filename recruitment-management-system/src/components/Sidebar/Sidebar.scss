@@ -1,5 +1,5 @@
 .side-bar-container {
-  width: 100px;
+  width: var(--sidebar-width);
   background: var(--primary-dark-blue);
   position: fixed;
   box-shadow: 1px 0px 10px 5px rgba(0, 0, 0, 0.05);
