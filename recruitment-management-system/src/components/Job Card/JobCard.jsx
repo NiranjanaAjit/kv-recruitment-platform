@@ -12,7 +12,7 @@ const JobCard = (props) => {
 	} = props;
 	
 	return (
-		<div className={`job-card ${!active && " border--color"}`}>
+		<div className={`job-card ${!active && " border--color"}`} onClick={props.onClick}>
 			<div className="job-card-upper-details">
 				<p className="job-card-position-id">Position ID: {id}</p>
 				<p className="job-card-title">{position}</p>
