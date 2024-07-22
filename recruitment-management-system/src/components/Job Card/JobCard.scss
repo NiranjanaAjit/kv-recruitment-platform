@@ -1,0 +1,137 @@
+.job-card {
+	width: 250px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	border-top: 4px solid var(--primary-light-blue);
+	padding: 10px;
+    transition-duration: 0.5s;
+
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.05);
+}
+
+.border--color{
+    border-top: 4px solid rgba(255, 0, 0, 0.452);
+
+}
+
+
+
+.job-card:hover{
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+}
+
+.job-card-upper-details {
+	width: 100%;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.job-card-position-id{
+	color: var(--font-color-grey);
+	font-weight: 800;
+	font-size: 13px;
+}
+.job-card-title {
+	font-size: 18px;
+	font-weight: 800;
+}
+
+.job-card-vacancies-container {
+	background-color: var(--green-light);
+	display: flex;
+	padding: 15px;
+	border-radius: 4px;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+
+
+.job-card-vacancies {
+	font-size: 13px;
+	color: var(--font-color-grey);
+	font-weight: 700;
+	margin-top: 30px;
+}
+
+.job-card-vacancies-numbers-title {
+	color: var(--font-color-grey);
+	font-weight: 700;
+	font-size: 12px;
+}
+
+.job-card-vacancies-numbers-amount-location{
+    font-size: 15px;
+  font-weight: 600;
+  margin-top: 7px;
+}
+
+.job-card-vacancies-numbers-amount-vacancy{
+    font-size: 25px;
+  font-weight: 600;
+}
+
+.job-card-vacancies-numbers{
+    width: 50%;
+    
+}
+
+.total{
+    border-left: 3px solid var(--yellow) ;
+    padding-left: 8px;
+}
+
+.experience{
+    border-left: 3px solid var(--primary-light-blue);
+    padding-left: 10px;
+
+}
+
+.job-card-refer{
+    width: 100%;
+    margin-top: 20px;
+    height: 40px;
+    background-color: var(--primary-dark-blue);
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+        transition-duration: 0.2s;
+
+
+}
+
+.job-card-refer:hover{
+    background-color: #ffffff;
+    color: var(--primary-dark-blue);
+    border: 2px solid var(--primary-dark-blue);
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.job-card-bottom{
+
+    border-top: 2px solid var(--font-color-grey);
+    width: 100%;
+    height: 20px;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.job-card-location{
+    color: var(--font-color-grey);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.job-card-posted{
+    text-align: end;
+    font-size: 12px;
+    color: var(--font-color-grey);
+    font-weight: 600;
+}
