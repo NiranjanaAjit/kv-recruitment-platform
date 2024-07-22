@@ -1,0 +1,36 @@
+.section-header {
+  height: 150px;
+  padding: 50px 100px 100px 100px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: var(--primary-dark-blue);
+  }
+  .title {
+    font-size: 32px;
+  }
+  .header-right {
+    display: flex;
+  }
+}
+
+.referrals-section {
+  padding: 50px;
+
+  .fields-header {
+    background-color: var(--green-button);
+    font-size: 18px;
+    color: var(--white-variant);
+    padding: 30px;
+    box-shadow: 0px 0px 10px #c5c4c4;
+    border-radius: 8px;
+  }
+  .referral-line {
+    display: grid;
+    padding: 20px;
+    margin: 5px 1% 5px 1%;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}

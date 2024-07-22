@@ -1,12 +1,15 @@
-
-.home-layout-content{
-    height: 100vh;
-    margin-left: 100px;
-   
+.home-layout-container {
+  background-color: var(--background-grey);
+  height: 100vh;
 }
 
-.blank-header{
-    width: 100%;
-    height: 100px;
-    border-bottom: 1px solid var(--primary-dark-blue);
+.home-layout-content {
+  margin-left: var(--sidebar-width);
+}
+
+.blank-header {
+  width: 100%;
+  height: 70px;
+  background-color: var(--white-variant);
+  box-shadow: 5px 0px 15px 1px #1c212d44;
 }
