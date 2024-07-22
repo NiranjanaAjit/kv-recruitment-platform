@@ -1,0 +1,30 @@
+.employeelist {
+  padding: 50px;
+  background-color: var(--main_background_off_grey);
+  height: 100%;
+
+  .employeelist--content {
+    .employeelist--content--header {
+      height: 100px;
+    }
+  }
+}
+
+.Probation {
+  color: #ffffff;
+  background-color: var(--yellow);
+  border: 1px solid var(--yellow);
+}
+
+.Active {
+  color: #ffffff;
+  background-color: var(--green-button);
+  border: 1px solid var(--green-button);
+}
+
+.Inactive {
+  color: #ffffff;
+
+  background-color: var(--delete_button);
+  border: 1px solid var(--delete_button);
+}

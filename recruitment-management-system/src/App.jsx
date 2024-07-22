@@ -1,6 +1,7 @@
+import "../src/App.scss";
 import { Provider } from "react-redux";
-import Router from "./Router";
 import store from "./store/store";
+import Router from "./Router";
 
 function App() {
   return (

@@ -1,0 +1,106 @@
+.data {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  width: 80%;
+
+  .data--heading {
+    display: grid;
+    gap: 5px;
+    background-color: #eaf9ff;
+    color: rgb(0, 0, 0);
+    width: 95%;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 900;
+  }
+
+  .data--details {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    background-color: #f5f5f3;
+
+    .data--rows {
+      display: grid;
+      padding: 5px;
+      height: 50px;
+      background-color: #fff;
+      border-bottom: 1px solid  var(--dark_blue);
+      align-items: center;
+      border-radius: 8px;
+      cursor: pointer;
+
+      span {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        align-items: center;
+      }
+    }
+
+    .header-options {
+      display: inline-flex;
+      width: 95%;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 200px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .header-probation {
+      display: inline-flex;
+      width: 95%;
+      padding: 3px;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 200px;
+      text-overflow: ellipsis;
+      background-color: yellow;
+      border-radius: 15px;
+    }
+
+    .header-inactive {
+      display: inline-flex;
+      width: 95%;
+      padding: 3px;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 200px;
+      text-overflow: ellipsis;
+      background-color: rgb(231, 126, 126);
+      border-radius: 15px;
+    }
+
+    .header-active {
+      display: inline-flex;
+      width: 95%;
+      padding: 3px;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 200px;
+      text-overflow: ellipsis;
+      background-color: greenyellow;
+      border-radius: 15px;
+    }
+
+    .action-images {
+      position: relative;
+      padding: 3px;
+      z-index: 2;
+    }
+  }
+}

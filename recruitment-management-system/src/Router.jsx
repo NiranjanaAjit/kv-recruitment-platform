@@ -13,6 +13,9 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import AdminHomeLayout from "./pages/AdminHomeLayout/AdminHomeLayout";
 import EmployeeDashboard from "./pages/EmployeeDashboard/EmployeeDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import AdminJobDetails from "./pages/AdminJobDetails/AdminJobDetails";
+import EmployeeJobDetails from "./pages/EmployeeJobDetails/EmployeeJobDetails";
+import EmployeeList from "./pages/EmployeeList/EmployeeList";
 
 function Router() {
   const dispatch = useDispatch();
@@ -49,6 +52,10 @@ function Router() {
               index: true,
               element: <EmployeeDashboard />,
             },
+            {
+              path: "jobDetails",
+              element: <EmployeeJobDetails />,
+            },
           ],
         },
       ],
@@ -64,6 +71,14 @@ function Router() {
             {
               index: true,
               element: <AdminDashboard />,
+            },
+            {
+              path: "jobDetails",
+              element: <AdminJobDetails />,
+            },
+            {
+              path: "employeeList",
+              element: <EmployeeList />,
             },
           ],
         },
