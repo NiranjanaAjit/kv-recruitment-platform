@@ -8,6 +8,8 @@ import GridRows from "../../components/GridRows/GridRows";
 import "./EmployeeList.scss";
 import { MdEditSquare } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import Modal from "../../components/Modal/Modal";
+import Button from "../../components/Button/Button";
 
 const EmployeeList = () => {
   let { id } = useParams();
@@ -87,7 +89,6 @@ const EmployeeList = () => {
     name: "Employee Name",
     id: "Employee ID",
     empJD: "Joining Date",
-    role: "Role",
     Status: "Status",
     Action: "Action",
   };
@@ -186,25 +187,24 @@ const EmployeeList = () => {
                   onDelete(empId);
                 }}
                 value={{ Del: "Delete", Cancel: "Cancel" }}
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  zIndex: "1000",
-
-                  width: "50%",
-                  height: "50%",
-                  backgroundColor: "rgba(255, 255, 255)",
-                  color: "black",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "40px",
-                  textAlign: "center",
-                  opacity: "1",
-                  border: "1px black solid",
-                  boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.5)", // Example box shadow
-                }}
-              ></Modal>
+                className={"employeeList"}
+              >
+                <h3>Are you sure you want to delete this entry ?</h3>
+                <Button
+                  className="modal--deletebutton"
+                  handleSubmit={() => {
+                    onDelete(empId);
+                  }}
+                  text="Delete"
+                />
+                <Button
+                  className="modal--cancelbutton"
+                  handleSubmit={() => {
+                    setShowDelete(false);
+                  }}
+                  text="Cancel"
+                />
+              </Modal>
             </>
           )}
         </div>
