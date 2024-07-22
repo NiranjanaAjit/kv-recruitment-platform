@@ -17,13 +17,18 @@
     gap: 0.5em;
   }
   input,
+  textarea,
   .select-container {
     padding: 10px;
     background-color: var(--white-variant);
     border-radius: 5px;
     border: 1px solid rgb(204, 201, 201);
   }
-  input:focus {
+  textarea {
+    width: 380px;
+  }
+  input:focus,
+  textarea:focus {
     outline: none;
     border: 1px solid black;
   }
@@ -36,7 +41,7 @@
   }
   select {
     border: none;
-    color: var(--black-variation);
+    color: var(--black-variant);
     background-color: var(--secondary);
     width: 100%;
   }
@@ -44,7 +49,48 @@
   label {
     font-weight: 800;
     font-size: 0.8rem;
-    color: var(--black-variation);
+    color: var(--black-variant);
+  }
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    align-items: center;
+
+    .content {
+      width: 350px;
+      padding-left: 2px;
+      background-color: var(--background-grey);
+      overflow-wrap: break-word;
+    }
+  }
+  .list-item-close {
+    border: 1px solid var(--red-variant);
+    color: var(--red-variant);
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .list-item-close:hover {
+    border: none;
+    cursor: pointer;
+    color: var(--pure-white);
+    background-color: var(--red-variant);
+  }
+  .list-input-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .plus-icon {
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 2px 8px;
+    font-size: 22px;
+    margin-left: 5px;
+    transition: 0.2s ease;
+  }
+  .plus-icon:hover {
+    color: var(--pure-white);
+    background-color: var(--black-variant);
   }
 }
 
@@ -71,12 +117,12 @@
 }
 
 .secondary-btn {
-  border: 1px solid var(--black-variation);
-  color: var(--black-variation);
+  border: 1px solid var(--black-variant);
+  color: var(--black-variant);
 }
 
 .secondary-btn:hover {
-  background-color: var(--black-variation);
+  background-color: var(--black-variant);
   color: #ffffff;
   transition: 0.2s;
 }

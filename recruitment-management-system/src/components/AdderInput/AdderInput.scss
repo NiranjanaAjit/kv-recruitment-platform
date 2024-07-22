@@ -1,32 +1,30 @@
 .selected-option {
-    display: inline-block;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border-radius: 3px;
-  }
-  
-  .selected-options-container{
-    display: flex;
-    align-items: center;
-    border: 2px solid #a3b0c6;
-    border-radius: 2px;
-    flex-wrap: wrap;
-    padding: 3px;
+  display: inline-block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+  border-radius: 3px;
+}
 
-  }
-  .selected-option .remove {
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #777;
-  }
+.selected-options-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid #a3b0c6;
+  border-radius: 2px;
+  flex-wrap: wrap;
+  padding: 3px;
+  min-height: 30px;
+}
+.selected-option .remove {
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #777;
+}
 
-  .adder-input-select{
-    width: 200px;
-    height: 30px;
-    padding-left: 10px;
-  }
-  
+.adder-input-select {
+  height: 30px;
+  padding-left: 10px;
+}

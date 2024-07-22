@@ -3,7 +3,14 @@ import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import "./Form.scss";
 
-const Form = ({ fields, onFieldChange, values, errors, onSubmit }) => {
+const Form = ({
+  fields,
+  onFieldChange,
+  values,
+  errors,
+  onSubmit,
+  onListChange,
+}) => {
   return (
     <div className="form-container">
       <div className="inputs-container">
@@ -12,7 +19,8 @@ const Form = ({ fields, onFieldChange, values, errors, onSubmit }) => {
             <field.component
               key={field.name}
               value={values[field.name]}
-              handleChange={(e) => onFieldChange(e)}
+              handleListChange={(newList) => onListChange(newList, field.name)}
+              handleChange={(e) => onFieldChange(e, field.name)}
               {...field}
             />
           ) : (
@@ -23,7 +31,9 @@ const Form = ({ fields, onFieldChange, values, errors, onSubmit }) => {
               name={field.name}
               value={values[field.name]}
               error={errors[field.name]}
-              handleChange={(e) => onFieldChange(e, field.maxLength)}
+              handleChange={(e) =>
+                onFieldChange(e, field.name, field.maxLength)
+              }
             />
           );
         })}
