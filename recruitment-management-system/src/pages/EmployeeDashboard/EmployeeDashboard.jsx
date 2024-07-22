@@ -2,6 +2,7 @@ import React from "react";
 import JobCard from "../../components/Job Card/JobCard";
 import "../EmployeeDashboard/EmployeeDashboard.scss";
 import ContentHeader from "../../components/Content Header/ContentHeader";
+import { useNavigate } from "react-router-dom";
 
 const detailsArray = [
 	{
@@ -142,6 +143,7 @@ const detailsArray = [
 ];
 
 const EmployeeDashboard = () => {
+	const navigate = useNavigate()
 
   const filteredArray= detailsArray.filter((obj)=> obj.active===true)
 
@@ -151,7 +153,7 @@ const EmployeeDashboard = () => {
       <ContentHeader title={`${filteredArray.length} Active Jobs`}/>
 		<div className="employee-dashbord-container ">
 			{filteredArray.map((record) => {
-				return <JobCard id={record.id} position={record.position} location={record.location} created_at={record.created_at} experience={record.experience} noOfOpening={record.noOfOpening} active={record.active} />;
+				return <JobCard id={record.id} position={record.position} location={record.location} created_at={record.created_at} experience={record.experience} noOfOpening={record.noOfOpening} active={record.active} onClick={()=>{navigate("/employee/jobDetails")}}/>;
 			})}
 		</div>
     </>
