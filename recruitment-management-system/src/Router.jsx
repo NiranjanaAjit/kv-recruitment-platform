@@ -19,6 +19,7 @@ import EmployeeJobDetails from "./pages/EmployeeJobDetails/EmployeeJobDetails";
 import EmployeeList from "./pages/EmployeeList/EmployeeList";
 import CreateJob from "./pages/CreateJob/CreateJob";
 import ReferCandidate from "./pages/ReferCandidate/ReferCandidate";
+import EmployeeProfile from "./pages/EmployeeProfile/EmployeeProfile";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
 
 function Router() {
@@ -67,6 +68,10 @@ function Router() {
             {
               path: "refer",
               element: <ReferCandidate />,
+            },
+            {
+              path: "profile",
+              element: <EmployeeProfile/>,
             },
           ],
         },
