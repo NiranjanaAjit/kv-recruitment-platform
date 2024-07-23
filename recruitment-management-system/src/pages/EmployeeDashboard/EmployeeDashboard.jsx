@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import JobCard from "../../components/Job Card/JobCard";
 import "../EmployeeDashboard/EmployeeDashboard.scss";
 import ContentHeader from "../../components/Content Header/ContentHeader";
@@ -7,6 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
 import FormInput from "../../components/FormInput/FormInput";
 import { useState } from "react";
+import { useGetJobListQuery } from "../../api/jobApi";
 
 const detailsArray = [
   {
@@ -149,6 +150,21 @@ const detailsArray = [
 const EmployeeDashboard = () => {
   const navigate = useNavigate();
   const [showRef, setShowRef] = useState(false);
+  const { data = [], isSuccess } = useGetJobListQuery();
+
+  const jobs = data?.map((job) => ({
+    id: job?.id,
+    position: job?.position?.name,
+    location: job?.location?.toUpperCase(),
+    experience: job?.experience,
+    noOfOpening: job?.noOfOpening,
+    active: job?.active,
+    createdAt: new Date(job?.createdAt).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+  }));
   const field = {
     name: "email",
     label: "email",
@@ -176,9 +192,9 @@ const EmployeeDashboard = () => {
 
   return (
     <>
-      <ContentHeader title={`${filteredArray.length} Active Jobs`} />
+      <ContentHeader title={`${jobs.length} Active Jobs`} />
       <div className="employee-dashbord-container ">
-        {filteredArray.map((record) => {
+        {jobs.map((record) => {
           return (
             <>
               <JobCard
@@ -186,7 +202,7 @@ const EmployeeDashboard = () => {
                 id={record.id}
                 position={record.position}
                 location={record.location}
-                created_at={record.created_at}
+                created_at={record.createdAt}
                 experience={record.experience}
                 noOfOpening={record.noOfOpening}
                 active={record.active}
