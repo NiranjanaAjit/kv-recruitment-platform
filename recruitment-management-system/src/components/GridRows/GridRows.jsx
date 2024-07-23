@@ -18,7 +18,7 @@ const GridRows = (props) => {
             return (
               <span className="data--span" key={props.Headers[options]}>
                 {props.Headers[options]}
-              </span> 
+              </span>
             );
           })}
         </div>

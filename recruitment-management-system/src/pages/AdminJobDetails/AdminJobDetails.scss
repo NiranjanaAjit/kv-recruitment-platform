@@ -123,4 +123,56 @@
       height: fit-content;
     }
   }
+  .modal--content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      label {
+        text-transform: capitalize;
+      }
+      input {
+        height: 30px;
+        width: 210px;
+      }
+    }
+
+    .modal--referbuttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+
+      .modal--referbutton {
+        background-color: var(--yellow);
+        padding: 10px;
+        font-weight: bold;
+        width: 100px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border: none;
+        height: 50px;
+      }
+      .modal--refercancelbutton {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        padding: 10px;
+        font-weight: bold;
+        width: 100px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border: none;
+        height: 50px;
+      }
+    }
+  }
 }

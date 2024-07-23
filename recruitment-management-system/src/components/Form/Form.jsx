@@ -10,6 +10,7 @@ const Form = ({
   errors,
   onSubmit,
   onListChange,
+  onCancel,
 }) => {
   return (
     <div className="form-container">
@@ -46,7 +47,7 @@ const Form = ({
         />
         <Button
           text="Cancel"
-          handleSubmit={() => navigate("/employees")}
+          handleSubmit={onCancel}
           className="form-btn secondary-btn"
         />
       </div>
