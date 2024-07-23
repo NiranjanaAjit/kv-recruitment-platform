@@ -13,8 +13,7 @@ const ProtectedRoute = ({ role }) => {
   //     if (!isAuthenticated || !userRole == role)
   //       return navigate("/", { replace: true });
   //   }, [pathname]);
-  if (!isAuthenticated || !userRole == role)
-    return <Navigate to="/" replace={true} />;
+  if (!isAuthenticated) return <Navigate to="/" replace={true} />;
   if (userRole !== role)
     return <Navigate to={`/${userRole.toLowerCase()}`} replace={true} />;
   return <Outlet />;

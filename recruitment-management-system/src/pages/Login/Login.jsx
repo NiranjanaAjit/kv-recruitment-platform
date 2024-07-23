@@ -26,7 +26,7 @@ const Login = () => {
   const onLogin = (e) => {
     console.log(loginCredential);
     e.preventDefault();
-    const role = roleEnum.NORMAL_USER;
+    const role = roleEnum.ADMIN;
     localStorage.setItem("accessToken", "true");
     localStorage.setItem("role", role);
     dispatch(signIn());
@@ -37,7 +37,7 @@ const Login = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      usernameRef.current.focus();
+      usernameRef.current?.focus();
     }, 1500);
   }, []);
 
