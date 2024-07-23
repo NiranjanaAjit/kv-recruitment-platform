@@ -8,6 +8,7 @@ const store = configureStore({
         auth: authReducer,
         [apiWithTag.reducerPath]: apiWithTag.reducer
     },
+    devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiWithTag.middleware)
 })
 

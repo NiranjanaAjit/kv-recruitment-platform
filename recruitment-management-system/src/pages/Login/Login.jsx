@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import TextField from "../../components/TextField/TextField";
 import "./Login.scss";
 import KvLogo from "../../assets/kv-logo.png";
@@ -8,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { roleEnum } from "../../utils/role.enum";
 import { useDispatch } from "react-redux";
 import { signIn, setRole } from "../../store/authReducer";
+import { useLoginMutation } from "../../api/loginApi";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [login, { data, isSuccess, error, isError }] = useLoginMutation();
 
   const [loginCredential, setLoginCredential] = useState({
     email: "",
@@ -26,15 +29,31 @@ const Login = () => {
   const onLogin = (e) => {
     console.log(loginCredential);
     e.preventDefault();
-    const role = roleEnum.ADMIN;
-    localStorage.setItem("accessToken", "true");
-    localStorage.setItem("role", role);
-    dispatch(signIn());
-    dispatch(setRole(role));
-    if (role === roleEnum.ADMIN) navigate("/admin");
-    else navigate("/employee");
+    login(loginCredential);
   };
+  useEffect(() => {
+    if (isSuccess && data.data.token) {
+      const token = data?.data?.token;
+      localStorage.setItem("accessToken", token);
+      const decoded = jwtDecode(token);
+      const role = decoded?.position?.toUpperCase();
+      dispatch(signIn());
 
+      console.log(decoded, token);
+      if (role === roleEnum.ADMIN) {
+        dispatch(setRole(role));
+        navigate("/admin");
+      } else {
+        dispatch(setRole(roleEnum.NORMAL_USER));
+        navigate("/employee");
+      }
+    }
+  }, [isSuccess, data]);
+  useEffect(() => {
+    if (isError) {
+      setErrors((errors) => ({ ...errors, password: error.data.message }));
+    }
+  }, [isError, error]);
   useEffect(() => {
     setTimeout(() => {
       usernameRef.current?.focus();
