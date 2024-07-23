@@ -23,20 +23,14 @@ import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
 
 function Router() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    // const token = localStorage.getItem("accessToken");
-    // if (!token) return;
-    // dispatch(signIn());
-    // const decoded = jwtDecode(token);
-    const token = localStorage.getItem("accessToken");
-    if (!token) return;
+  const token = localStorage.getItem("accessToken");
+  if (token) {
     dispatch(signIn());
-    const role = localStorage.getItem("role");
-    // const role =
-    // decoded.role === roleEnum.ADMIN ? roleEnum.ADMIN : roleEnum.NORMAL_USER;
-    dispatch(setRole(role));
-  });
-
+    const decodedToken = jwtDecode(token);
+    const role = decodedToken?.position?.toUpperCase();
+    if (role === roleEnum.ADMIN) dispatch(setRole(role));
+    else dispatch(setRole(roleEnum.NORMAL_USER));
+  }
   const route = createBrowserRouter([
     {
       //ADDITION : Login Page and assign
