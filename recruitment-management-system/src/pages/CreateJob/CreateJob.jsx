@@ -3,6 +3,7 @@ import ContentHeader from "../../components/Content Header/ContentHeader";
 import Form from "../../components/Form/Form";
 import AdderInput from "../../components/AdderInput/AdderInput";
 import ListInput from "../../components/ListInput/ListInput";
+import { useNavigate } from "react-router-dom";
 
 const CreateJob = () => {
   const skillOptions = [
@@ -87,6 +88,8 @@ const CreateJob = () => {
       initialState[field.name] = "";
     else initialState[field.name] = [];
   });
+
+  const navigate = useNavigate();
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
   const onChange = (e, fieldName, maxLength = 20) => {
@@ -130,6 +133,7 @@ const CreateJob = () => {
         values={valueState}
         errors={errState}
         onSubmit={handleSubmit}
+        onCancel={() => navigate("/admin")}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import "./GridRows.scss";
 
 const GridRows = (props) => {
-  const color = props.color;
+  const color = props.color ? props.color : { };
 
   return (
     <>
@@ -18,13 +18,13 @@ const GridRows = (props) => {
             return (
               <span className="data--span" key={props.Headers[options]}>
                 {props.Headers[options]}
-              </span> 
+              </span>
             );
           })}
         </div>
         <br />
         <div className="data--details">
-          {props.Details.map((value) => {
+          {props.Details?.map((value) => {
             return (
               <div
                 className="data--rows"
@@ -54,7 +54,7 @@ const GridRows = (props) => {
                     );
                   }
                 })}
-                {props.actions(value.id) ? props.actions(value.id) : {}}
+                {props.actions ? props.actions(value.id) : null}
               </div>
             );
           })}
