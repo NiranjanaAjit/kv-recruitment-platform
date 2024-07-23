@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 
 import ReferralLine from "../../components/ReferralLine/ReferralLine";
 import Select from "../../components/Select/Select";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import "./Referrals.scss";
+import { useReferralQuery } from "../../api/referralListApi";
+import { useEffect } from "react";
 
 const Referrals = () => {
+  const { data: data, isSuccess: isSuccess } = useReferralQuery();
+  console.log(data);
+  const [referDetails, setReferDetails] = useState([]);
+  const token = localStorage.getItem("accessToken");
+  console.log(token);
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const decodedData = JSON.parse(window.atob(base64));
+
+  console.log(decodedData);
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log(data);
+      let ref = data.map((Object) => {
+        const jobOpening = Object.jobOpening;
+        console.log(jobOpening);
+        const position = jobOpening?.position;
+        const referrer = Object.referrer;
+        const referee = Object.referree;
+        console.log(referrer, position, jobOpening, "hey");
+
+        return {
+          candidate_name: referee.name,
+          job_position: position?.name,
+          referred_by: referrer?.name,
+          status: Object?.status,
+          bonus:
+            referrer?.email === decodedData.email
+              ? Object.status
+              : "Unavailable",
+        };
+      });
+
+      setReferDetails(ref);
+    }
+  }, [data, isSuccess]);
+
+  console.log(referDetails);
+
   const titles = [
     "Candidate name",
     "Job Position",
@@ -90,7 +132,7 @@ const Referrals = () => {
             ))}
           </div>
         </section>
-        {referrals.map((referral) => (
+        {referDetails.map((referral) => (
           <ReferralLine key={referral.id} referral={referral} />
         ))}
       </section>
