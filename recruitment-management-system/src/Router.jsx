@@ -78,6 +78,10 @@ function Router() {
               element: <AdminDashboard />,
             },
             {
+              path: "referrals",
+              element: <Referrals />,
+            },
+            {
               path: "jobDetails",
               element: <AdminJobDetails />,
             },
