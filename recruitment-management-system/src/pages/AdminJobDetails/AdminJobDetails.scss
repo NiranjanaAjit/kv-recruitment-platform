@@ -6,7 +6,7 @@
   --delete_button: #e14f4f;
 }
 
-.jobdetail {
+.admin--jobdetail {
   position: relative;
   background-color: var(--main_background_off_grey);
   width: 100%;
@@ -46,8 +46,8 @@
       }
 
       .refer--button:hover {
-        background-color: var(--green_button); /* Background color on hover */
-        color: var(--main_background_off_grey); /* Text color on hover */
+        background-color: var(--green_button);
+        color: var(--main_background_off_grey);
       }
 
       .edit--button {
@@ -92,6 +92,18 @@
       flex-direction: column;
       gap: 50px;
 
+      .jobdetail--requirements {
+        .requirement--points {
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+
+          .jobdetail--points {
+            padding: 10px;
+          }
+        }
+      }
+
       .skill--list {
         display: flex;
         flex-direction: row;
@@ -108,6 +120,7 @@
       flex-direction: column;
       gap: 20px;
       padding: 10px;
+      height: fit-content;
     }
   }
 }
