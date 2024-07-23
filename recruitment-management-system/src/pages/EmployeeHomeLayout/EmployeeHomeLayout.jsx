@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosPeople } from "react-icons/io";
 import { IoMdAdd } from "react-icons/io";
 import { PiSuitcaseSimpleBold } from "react-icons/pi";
-import { IoIosGift } from "react-icons/io";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const EmployeeHomeLayout = () => {
   const navigate = useNavigate();
@@ -14,17 +14,29 @@ const EmployeeHomeLayout = () => {
     navigate("referrals");
   };
 
+  const onJobList = () => {
+    navigate("/employee");
+  };
+
+  const onClickProfile = () => {
+    navigate("profile");
+  };
+
   return (
     <div className="home-layout-container">
       <Sidebar>
+        <div className="side-bar__buttons" onClick={onJobList}>
+          <PiSuitcaseSimpleBold className="side-bar__button__icons" />
+          <h4 className="side-bar__button__labels">Job List</h4>
+        </div>
         <div className="side-bar__buttons" onClick={onClickRef}>
           <IoIosPeople className="side-bar__button__icons" />{" "}
           <h4 className="side-bar__button__labels">Referrals</h4>
         </div>
-        <div className="side-bar__buttons">
+        <div className="side-bar__buttons" onClick={onClickProfile}>
           {" "}
-          <IoIosGift className="side-bar__button__icons" />{" "}
-          <h4 className="side-bar__button__labels">Rewards</h4>
+          <IoPersonCircleOutline className="side-bar__button__icons" />{" "}
+          <h4 className="side-bar__button__labels">Profile</h4>
         </div>
       </Sidebar>
       <div className="home-layout-content">
