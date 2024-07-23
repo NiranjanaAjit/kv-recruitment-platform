@@ -9,6 +9,7 @@ import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import FormInput from "../../components/FormInput/FormInput";
 import { useParams } from "react-router-dom";
+import { useGetJobDetailsQuery } from "../../api/jobApi";
 
 const EmployeeJobDetails = () => {
   const { id } = useParams();
@@ -19,7 +20,32 @@ const EmployeeJobDetails = () => {
     label: "email",
     type: "text",
   };
-
+  const { data = [], isSuccess } = useGetJobDetailsQuery(id);
+  const {
+    description,
+    skills,
+    location,
+    experience,
+    noOfOpening,
+    active,
+    position,
+    createdAt,
+  } = data;
+  const jobDetail = {
+    responsibility: description?.responsibility,
+    qualification: description?.qualification,
+    skills,
+    location,
+    experience,
+    noOfOpening,
+    active,
+    createdAt: new Date(createdAt).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }),
+    position: position?.name,
+  };
   const [valueState, setValueState] = useState({ email: "" });
   const [errState, setErrState] = useState([]);
 
@@ -35,40 +61,6 @@ const EmployeeJobDetails = () => {
     //TODO: Implement to backend
   };
 
-  const jobDetail = {
-    title: "Software Engineer",
-    detail:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum aliquidistinctio earum rem id totam quibusdam alias quos excepturi odionostrum aut, hic cum neque aliquam architecto consequuntur. Ipsam, laborum!",
-    location: "New York, NY",
-    experience: "3-5 years",
-    createdAt: "2024-07-20",
-    noOfOpenings: 2,
-    descrip: {
-      responsibility: [
-        {
-          point:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum aliquidistinctio earum rem id totam quibusdam alias quos excepturi odionostrum aut, hic cum neque aliquam architecto consequuntur. Ipsam, laborum!",
-        },
-        { point: "Example responsibility 2" },
-      ],
-      qualification: [
-        { point: "Example qualification 1" },
-        { point: "Example qualification 2" },
-      ],
-    },
-    skills: { name: ["python", "java", "django", "numpy"] },
-    active: true,
-  };
-
-  // const jobTileDetail = jobDetail.filter(
-  //   (value) =>
-  //     value !== "title" && value !== "detail" && value !== "skills"
-  // );
-
-  const skills = jobDetail.skills;
-  const detail = jobDetail.descrip;
-
-  console.log(detail);
   const descriptionMapper = {
     responsibility: "Responsibility",
     qualification: "Qualifications",
@@ -76,7 +68,6 @@ const EmployeeJobDetails = () => {
 
   const onRefer = () => {
     // TODO: EMAIL MODAL
-    console.log("mogging");
 
     setShowRef(!showRef);
   };
@@ -85,7 +76,7 @@ const EmployeeJobDetails = () => {
     <main className="employee--jobdetail">
       <div className="jobdetail--header">
         <div className="header--title">
-          <h1>{jobDetail.title}</h1>
+          <h1>{jobDetail.position}</h1>
           <div className="header--location">
             {<MdLocationOn size={20} />}
             {jobDetail.location}
@@ -106,32 +97,25 @@ const EmployeeJobDetails = () => {
         <div className="jobdetail--details--main">
           <div className="jobdetail--description">
             <h2>Job description</h2>
-            {jobDetail.detail}
           </div>
           <div className="skills">
             <h2>Skills</h2>
             <div className="skill--list">
-              {skills.name.map((value) => {
+              {jobDetail?.skills?.map((value) => {
                 return <Pill value={value} key={value}></Pill>;
               })}
             </div>
           </div>
           <div className="jobdetail--requirements">
             {Object.keys(descriptionMapper).map((options) => {
-              {
-                console.log(descriptionMapper[options]);
-                console.log(options);
-              }
+              console.log(options);
               return (
                 <>
-                  {console.log(detail[options])}
                   <h2>{descriptionMapper[options]}</h2>
                   <div className="requirement--points">
-                    {detail[options].map((value) => {
-                      console.log(value);
-                      return (
-                        <li className="jobdetail--points">{value.point}</li>
-                      );
+                    {jobDetail[options]?.map((value) => {
+                      console.log(options);
+                      return <li className="jobdetail--points">{value}</li>;
                     })}
                   </div>
                 </>
