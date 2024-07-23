@@ -60,7 +60,7 @@ function Router() {
               element: <Referrals />,
             },
             {
-              path: "jobDetails",
+              path: "jobDetails/:id",
               element: <EmployeeJobDetails />,
             },
             {
@@ -88,7 +88,7 @@ function Router() {
               element: <Referrals />,
             },
             {
-              path: "jobDetails",
+              path: "jobDetails/:id",
               element: <AdminJobDetails />,
             },
             {
