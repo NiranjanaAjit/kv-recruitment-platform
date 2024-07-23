@@ -18,7 +18,7 @@ const AdminHomeLayout = () => {
   };
 
   const onEmpCreate = () => {
-    navigate("employeeCreate");
+    navigate("create-employee");
   };
 
   const onEmpList = () => {
