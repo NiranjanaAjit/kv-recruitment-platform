@@ -11,22 +11,42 @@ const AdminJobDetails = () => {
 
   const jobDetail = {
     title: "Software Engineer",
-    description:
+    detail:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum aliquidistinctio earum rem id totam quibusdam alias quos excepturi odionostrum aut, hic cum neque aliquam architecto consequuntur. Ipsam, laborum!",
     location: "New York, NY",
     experience: "3-5 years",
     createdAt: "2024-07-20",
     noOfOpenings: 2,
     skills: { name: ["python", "java", "django", "numpy"] },
+    descrip: {
+      responsibility: [
+        {
+          point:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum aliquidistinctio earum rem id totam quibusdam alias quos excepturi odionostrum aut, hic cum neque aliquam architecto consequuntur. Ipsam, laborum!",
+        },
+        { point: "Example responsibility 2" },
+      ],
+      qualification: [
+        { point: "Example qualification 1" },
+        { point: "Example qualification 2" },
+      ],
+    },
     active: true,
   };
 
   // const jobTileDetail = jobDetail.filter(
   //   (value) =>
-  //     value !== "title" && value !== "description" && value !== "skills"
+  //     value !== "title" && value !== "detail" && value !== "skills"
   // );
 
   const skills = jobDetail.skills;
+  const detail = jobDetail.descrip;
+
+  console.log(detail);
+  const descriptionMapper = {
+    responsibility: "Responsibility",
+    qualification: "Qualifications",
+  };
 
   const onEdit = (id) => {
     console.log("here");
@@ -42,7 +62,7 @@ const AdminJobDetails = () => {
   };
 
   return (
-    <main className="jobdetail">
+    <main className="admin--jobdetail">
       <div className="jobdetail--header">
         <div className="header--title">
           <h1>{jobDetail.title}</h1>
@@ -84,17 +104,39 @@ const AdminJobDetails = () => {
       </div>
       <div className="jobdetail--details">
         <div className="jobdetail--details--main">
-          <div className="description">
-            <h3>Job Description</h3>
-            {jobDetail.description}
+          <div className="jobdetail--description">
+            <h2>Job description</h2>
+            {jobDetail.detail}
           </div>
           <div className="skills">
-            <h3>Skills</h3>
+            <h2>Skills</h2>
             <div className="skill--list">
               {skills.name.map((value) => {
                 return <Pill value={value} key={value}></Pill>;
               })}
             </div>
+          </div>
+          <div className="jobdetail--requirements">
+            {Object.keys(descriptionMapper).map((options) => {
+              {
+                console.log(descriptionMapper[options]);
+                console.log(options);
+              }
+              return (
+                <>
+                  {console.log(detail[options])}
+                  <h2>{descriptionMapper[options]}</h2>
+                  <div className="requirement--points">
+                    {detail[options].map((value) => {
+                      console.log(value);
+                      return (
+                        <li className="jobdetail--points">{value.point}</li>
+                      );
+                    })}
+                  </div>
+                </>
+              );
+            })}
           </div>
         </div>
 
