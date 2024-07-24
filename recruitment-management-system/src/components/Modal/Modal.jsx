@@ -12,7 +12,7 @@ const Modal = ({
   return (
     <>
       <div className="modal--outsidebox">
-        <div className={`modal--insidebox--${className}`}>
+        <div className={`modal--insidebox ${className}`}>
           <div className="modal--close" onClick={onClose}>
             x
           </div>
