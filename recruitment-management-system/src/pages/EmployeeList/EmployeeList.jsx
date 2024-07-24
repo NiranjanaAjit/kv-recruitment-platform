@@ -10,15 +10,17 @@ import { MdEditSquare } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
-import { useGetEmployeeListQuery } from "../../api/employeeApi";
+import {
+  useDeleteEmployeeListByIdMutation,
+  useGetEmployeeListQuery,
+} from "../../api/employeeApi";
 
 const EmployeeList = () => {
   let { id } = useParams();
   const navigate = useNavigate();
   const [showDelete, setShowDelete] = useState(false);
   const [empId, setEmpId] = useState(0);
-  const dispatch = useDispatch();
-
+  const [empDelete] = useDeleteEmployeeListByIdMutation();
   const [empDetails, setEmpDetails] = useState([
     {
       name: "Harry",
@@ -93,30 +95,9 @@ const EmployeeList = () => {
     navigate(`edit/${id}`);
   };
 
-  const onCreate = (id) => {
-    navigate("create");
-  };
-
-  const onSelect = (e, id) => {
-    e.stopPropagation();
-    navigate(`details/${id}`);
-  };
-
   const onDelete = (id) => {
-    // const action = {
-    //   type: actionTypes.DELETE_EMPLOYEES,
-    //   payload: id,
-    // };
     setShowDelete(false);
-    deleteEmp({ id: id });
-  };
-
-  const onFilter = (e, action) => {
-    // dispatch({
-    //   type: actionTypes.FILTER_EMPLOYEES,
-    //   payload: action,
-    // });
-    dispatch(filterEmployee(action));
+    empDelete({ id });
   };
 
   const actions = (id) => {
@@ -157,6 +138,15 @@ const EmployeeList = () => {
             <div className="header--title">
               <h1>Employee List</h1>
               {/* TODO: ADD FILTER */}
+            </div>
+            <div className="header--buttons">
+              <Button
+                className="create--button"
+                text="Create Employee"
+                handleSubmit={() => {
+                  navigate("/admin/create-employee");
+                }}
+              ></Button>
             </div>
           </div>
           <GridRows

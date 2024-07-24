@@ -2,11 +2,55 @@ import { lazy, useEffect, useState } from "react";
 import ContentHeader from "../../components/Content Header/ContentHeader";
 import Select from "../../components/Select/Select";
 import Form from "../../components/Form/Form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useEditEmployeeListMutation,
+  useGetEmployeeListByIdQuery,
+} from "../../api/employeeApi";
+import { useGetPositionListQuery } from "../../api/positionApi";
 
 const EditEmployee = () => {
   const { id } = useParams();
-  console.log(id);
+  const navigate = useNavigate();
+  const { data: getPositions, isSuccess: success } = useGetPositionListQuery();
+  const [updateEmployee] = useEditEmployeeListMutation();
+  const { data: getEmployeeById, isSuccess } = useGetEmployeeListByIdQuery({
+    id,
+  });
+  const [data, setData] = useState({});
+  const [positionData, setPositionData] = useState([
+    { value: "", display: "" },
+  ]);
+
+  useEffect(() => {
+    if (success) {
+      setPositionData(
+        getPositions.map((val) => ({
+          value: val.name,
+          display: val.name,
+        }))
+      );
+    }
+  }, [getPositions, success]);
+
+  useEffect(() => {
+    isSuccess ? setData(getEmployeeById) : setData({});
+  }, [getEmployeeById, isSuccess]);
+
+  useEffect(() => {
+    if (data) {
+      const position = data.position;
+      setValueState({
+        name: data.name,
+        position: position?.name,
+        experience: data.experience,
+        email: data.email,
+        password: data.password ? data.password : "",
+        id: id,
+      });
+    }
+  }, [data]);
+
   const positionOptions = [
     {
       value: "Associate software engineer",
@@ -58,12 +102,12 @@ const EditEmployee = () => {
       name: "position",
       label: "Position",
       placeholder: "Position",
-      options: positionOptions,
+      options: positionData ? positionData : positionOptions,
       className: "select-container",
       component: Select,
     },
     {
-      name: "Employee ID",
+      name: "id",
       label: "Employee ID",
       value: id,
       disable: true,
@@ -73,13 +117,19 @@ const EditEmployee = () => {
   fields.map((field) => {
     if (field.name == "Employee ID") {
       initialState[field.name] = id;
-      console.log(initialState[field.name]);
     } else {
       initialState[field.name] = "";
     }
   });
 
-  const [valueState, setValueState] = useState(initialState);
+  const [valueState, setValueState] = useState({
+    name: "",
+    position: "",
+    experience: "",
+    email: "",
+    password: "",
+    id: id,
+  });
   const [errState, setErrState] = useState(initialState);
 
   const onChange = (e, fieldName, maxLength = 20) => {
@@ -102,13 +152,20 @@ const EditEmployee = () => {
         }));
       }
     }
+    // if (fieldName == "password") {
+    //   setValueState((state) => ({
+    //     ...state,
+    //     [e.target.name]: e.target.value == "" ? undefined : e.target.value,
+    //   }));
+    // } else {
     setValueState((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
   };
   const handleSubmit = () => {
-    console.log(valueState);
+    updateEmployee({ id, payload: valueState });
+    navigate(-1);
   };
   return (
     <>
