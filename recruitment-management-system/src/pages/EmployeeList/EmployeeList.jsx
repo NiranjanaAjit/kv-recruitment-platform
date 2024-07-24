@@ -10,6 +10,7 @@ import { MdEditSquare } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
+import { useGetEmployeeListQuery } from "../../api/employeeApi";
 
 const EmployeeList = () => {
   let { id } = useParams();
@@ -17,6 +18,7 @@ const EmployeeList = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [empId, setEmpId] = useState(0);
   const dispatch = useDispatch();
+
   const [empDetails, setEmpDetails] = useState([
     {
       name: "Harry",
@@ -60,36 +62,30 @@ const EmployeeList = () => {
     },
   ]);
 
-  // let status = useSelector((state) => {
-  //   return state.employee.status;
-  // });
+  const { data, isSuccess } = useGetEmployeeListQuery();
+  useEffect(() => {
+    if (isSuccess) {
+      const employees = data.map((emp) => ({
+        ...emp,
+        joiningDate: new Date(emp.createdAt).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+      }));
 
-  // const { data, isSuccess } = useGetEmployeeListQuery();
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     const employees = data.map((emp) => ({
-  //       ...emp,
-  //       joiningDate: new Date(emp.createdAt).toLocaleDateString("en-GB", {
-  //         day: "numeric",
-  //         month: "short",
-  //         year: "numeric",
-  //       }),
-  //     }));
-  //     setEmpDetails(
-  //       status === "All"
-  //         ? employees
-  //         : employees.filter((employee) => employee.status === status)
-  //     );
-  //   }
-  // }, [data, isSuccess, status]);
+      setEmpDetails(employees);
+    }
+  }, [data, isSuccess]);
 
   // const empHeaders = EmpDetails.headers;
 
   const empHeaders = {
     name: "Employee Name",
     id: "Employee ID",
-    empJD: "Joining Date",
-    Status: "Status",
+    joiningDate: "Joining Date",
+    experience: "Experience",
+
     Action: "Action",
   };
 
@@ -121,12 +117,6 @@ const EmployeeList = () => {
     //   payload: action,
     // });
     dispatch(filterEmployee(action));
-  };
-
-  const color = {
-    Active: "Active",
-    Probation: "Probation",
-    Inactive: "Inactive",
   };
 
   const actions = (id) => {
@@ -172,7 +162,6 @@ const EmployeeList = () => {
           <GridRows
             Headers={empHeaders}
             Details={empDetails}
-            color={color}
             actions={actions}
           ></GridRows>
           {showDelete && (
