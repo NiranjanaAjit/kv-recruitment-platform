@@ -5,10 +5,9 @@ const notificationApi = apiWithTag.injectEndpoints({
     getNotifications: builder.query({
       query: () => "/notifications",
       providesTags: ["NOTIFICATION_LIST"],
+      keepUnusedDataFor: 2,
     }),
   }),
 });
 
-export const {
-  useGetNotificationsQuery
-} = notificationApi;
+export const { useGetNotificationsQuery } = notificationApi;
