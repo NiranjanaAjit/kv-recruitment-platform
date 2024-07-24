@@ -16,7 +16,7 @@ const Form = ({
 }) => {
   return (
     <div className="form-container">
-      {console.log(values)}{" "}
+      {/* {console.log(values)}{" "} */}
       <div className="inputs-container">
         {fields.map((field) => {
           return field.component ? (

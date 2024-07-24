@@ -13,34 +13,10 @@ import {
   useGetPositionListQuery,
 } from "../../api/positionApi";
 import { useCreateJobDetailsMutation } from "../../api/jobApi";
+import AddNewPositionContent from "../../components/AddNewPositionModalContent/AddNewPositionContent";
+import { useNavigate } from "react-router-dom";
 
-const AddNewPositionContent = ({ modalClose }) => {
-  const [position, setPosition] = useState("");
-  const [addPosition] = useAddPositionMutation();
 
-  const handleFieldChange = (e) => {
-    setPosition(e.target.value);
-  };
-  const addNewPositionSubmit = () => {
-    addPosition({ name: position });
-    modalClose(false);
-  };
-
-  return (
-    <div className="add-new-position-container">
-      <FormInput
-        label={"Enter new position"}
-        value={position}
-        handleChange={handleFieldChange}
-      />
-      <Button
-        text="Add"
-        className={"add-new-position-button"}
-        handleSubmit={addNewPositionSubmit}
-      />
-    </div>
-  );
-};
 
 const CreateJob = () => {
   const [createJob] = useCreateJobDetailsMutation();
@@ -86,32 +62,32 @@ const CreateJob = () => {
 
   // ----------------------------------------------------------
 
-  const positionOptions = [
-    {
-      value: "Associate software engineer",
-      display: "Associate software engineer",
-    },
-    {
-      value: "Software Engineer",
-      display: "Software Engineer",
-    },
-    {
-      value: "Sr. Software Engineer",
-      display: "Sr. Software Engineer",
-    },
-    {
-      value: "Associate Technical Lead",
-      display: "Associate Technical Lead",
-    },
-    {
-      value: "HR manager",
-      display: "HR manager",
-    },
-    {
-      value: "Product manager",
-      display: "Product manager",
-    },
-  ];
+  // const positionOptions = [
+  //   {
+  //     value: "Associate software engineer",
+  //     display: "Associate software engineer",
+  //   },
+  //   {
+  //     value: "Software Engineer",
+  //     display: "Software Engineer",
+  //   },
+  //   {
+  //     value: "Sr. Software Engineer",
+  //     display: "Sr. Software Engineer",
+  //   },
+  //   {
+  //     value: "Associate Technical Lead",
+  //     display: "Associate Technical Lead",
+  //   },
+  //   {
+  //     value: "HR manager",
+  //     display: "HR manager",
+  //   },
+  //   {
+  //     value: "Product manager",
+  //     display: "Product manager",
+  //   },
+  // ];
 
   const [positionFields, setPositionFields] = useState([]);
   useEffect(() => {
@@ -172,7 +148,7 @@ const CreateJob = () => {
       component: ListInput,
     },
   ];
-
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   let initialState = {};
   fields.map((field) => {
@@ -180,6 +156,7 @@ const CreateJob = () => {
       initialState[field.name] = "";
     else initialState[field.name] = [];
   });
+  console.log(initialState)
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
   const onChange = (e, fieldName, maxLength = 20) => {
@@ -244,8 +221,7 @@ const CreateJob = () => {
             setModal(false);
           }}
         >
-          {" "}
-          <AddNewPositionContent modalClose={setModal} />{" "}
+          <AddNewPositionContent modalClose={setModal} />
         </Modal>
       ) : (
         <></>
@@ -258,6 +234,8 @@ const CreateJob = () => {
         errors={errState}
         onSubmit={handleSubmit}
         handleAddNew={addNewPosition}
+        onCancel={() => navigate("/admin")}
+
       />
     </div>
   );
