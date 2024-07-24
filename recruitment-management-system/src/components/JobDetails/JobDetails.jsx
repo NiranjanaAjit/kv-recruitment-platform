@@ -99,7 +99,7 @@ const JobDetails = () => {
             {<MdLocationOn size={20} />}
             {jobDetail?.location?.toUpperCase()}
           </div>
-          <div className="heder--status">
+          <div className="header--status">
             {jobDetail?.active ? "Active" : "Inactive"}
           </div>
         </div>
