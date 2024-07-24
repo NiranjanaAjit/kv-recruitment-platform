@@ -2,8 +2,28 @@ import { useEffect, useState } from "react";
 import ContentHeader from "../../components/Content Header/ContentHeader";
 import Select from "../../components/Select/Select";
 import Form from "../../components/Form/Form";
+import { useGetPositionListQuery } from "../../api/positionApi";
+import { usePostEmployeeListMutation } from "../../api/employeeApi";
+import { useNavigate } from "react-router-dom";
 
 const CreateEmployee = () => {
+  const { data: getPositions, isSuccess: success } = useGetPositionListQuery();
+  const [postEmployee] = usePostEmployeeListMutation();
+  const [positionData, setPositionData] = useState([
+    { value: "", display: "" },
+  ]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (success) {
+      setPositionData(
+        getPositions.map((val) => ({
+          value: val.name,
+          display: val.name,
+        }))
+      );
+    }
+  }, [getPositions, success]);
+
   const positionOptions = [
     {
       value: "Associate software engineer",
@@ -54,7 +74,7 @@ const CreateEmployee = () => {
     {
       name: "position",
       label: "Position",
-      options: positionOptions,
+      options: positionData ? positionData : positionOptions,
       className: "select-container",
       component: Select,
     },
@@ -94,6 +114,8 @@ const CreateEmployee = () => {
   };
   const handleSubmit = () => {
     console.log(valueState);
+    postEmployee(valueState);
+    navigate(-1);
   };
   return (
     <>

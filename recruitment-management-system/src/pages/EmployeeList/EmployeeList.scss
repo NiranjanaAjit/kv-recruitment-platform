@@ -6,6 +6,27 @@
   .employeelist--content {
     .employeelist--content--header {
       height: 100px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .header--buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      height: 50px;
+
+      .create--button {
+        background-color: var(--main_background_off_grey);
+        border: 3px solid var(--green_button);
+        padding: 10px;
+        color: var(--green_button);
+        font-weight: bold;
+      }
+
+      .--button:hover {
+        background-color: var(--green_button);
+        color: var(--main_background_off_grey);
+      }
     }
   }
 }
