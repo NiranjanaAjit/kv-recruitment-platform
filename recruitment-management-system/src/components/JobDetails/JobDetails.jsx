@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import {
   useGetJobDetailsQuery,
   useDeleteJobDetailsMutation,
+  usePutJobDetailsMutation,
 } from "../../api/jobApi";
 import { useSelector } from "react-redux";
 import { roleEnum } from "../../utils/role.enum";
@@ -21,7 +22,7 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [showRefer, setShowRefer] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [closeJob] = useDeleteJobDetailsMutation();
+  const [deactivateJob] = usePutJobDetailsMutation();
   const field = {
     name: "email",
     label: "email",
@@ -74,12 +75,16 @@ const JobDetails = () => {
     qualification: "Qualifications",
   };
 
-  const onDelete = (id) => {
-    closeJob(id);
+  const onDelete = (id, skills) => {
+    const payload = {
+      active: false,
+      skills: skills,
+    };
+    //TODO: SKILLS NOT REQUIRED IF FIXED IN DTO
+    deactivateJob({ id, payload });
     navigate("/admin");
 
     console.log(id);
-    //TODO: Integrate Backend
   };
 
   const onRefer = () => {
@@ -227,7 +232,7 @@ const JobDetails = () => {
                 <Button
                   className="modal--deletebutton"
                   handleSubmit={() => {
-                    onDelete(id);
+                    onDelete(id, jobDetail.skills);
                   }}
                   text="Delete"
                 />
