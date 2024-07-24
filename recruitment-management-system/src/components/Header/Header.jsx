@@ -5,7 +5,7 @@ import { IoIosExit } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const data = localStorage.getItem("accessToken");
   const decode = jwtDecode(data);
   console.log(decode);
