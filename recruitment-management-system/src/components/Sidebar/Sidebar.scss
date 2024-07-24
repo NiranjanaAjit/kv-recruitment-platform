@@ -1,9 +1,10 @@
 .side-bar-container {
   width: var(--sidebar-width);
-  background: var(--primary-dark-blue);
+  background: var(--sidebar-color);
   position: fixed;
   box-shadow: 1px 0px 10px 5px rgba(0, 0, 0, 0.05);
   transition-duration: 0.5s;
+  min-width:100px;
   height: 100vh;
   z-index: 1;
 
@@ -13,10 +14,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--tertiary-color);
+    
   }
 
   .side-bar__button__icons {
-    color: var(--yellow);
+    color: var(--tertiary-color);
     font-size: 30px;
   }
 
@@ -25,9 +28,10 @@
   }
 
   .side-bar__buttons:hover {
-    background: var(--yellow);
-    width: 103%;
+    background: var(--tertiary-color);
+    width: 100%;
     border-radius: 0px 3px 3px 0px;
+    color: var(--sidebar-color);
 
     .side-bar__button__icons {
       color: var(--primary-dark-blue);
