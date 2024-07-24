@@ -10,6 +10,7 @@ import { PiSuitcaseSimpleBold } from "react-icons/pi";
 import { IoIosGift } from "react-icons/io";
 import { PiUserListBold } from "react-icons/pi";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import Header from "../../components/Header/Header";
 
 const AdminHomeLayout = () => {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ const AdminHomeLayout = () => {
           </div>
         </Sidebar>
         <div className="home-layout-content">
-          <div className="blank-header"></div>
+          <Header/>
           <Outlet />
         </div>
       </div>
