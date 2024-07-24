@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import ContentHeader from "../../components/Content Header/ContentHeader";
 import AdderInput from "../../components/AdderInput/AdderInput";
 import Form from "../../components/Form/Form";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useGetCandidateDetailsQuery } from "../../api/candidateApi";
+import {
+  useCheckReferralMutation,
+  useCreateReferralMutation,
+} from "../../api/referralApi";
+import { useSelector } from "react-redux";
 
 const ReferCandidate = () => {
   const skillOptions = [
@@ -58,13 +66,25 @@ const ReferCandidate = () => {
       maxLength: 60,
     },
     {
-      name: "skill",
+      name: "skills",
       label: "Candidate's skills",
       options: skillOptions,
       component: AdderInput,
     },
   ];
-
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const role = useSelector((state) => state.auth.userRole);
+  const token = localStorage.getItem("accessToken");
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);
+  const { data = [], isSuccess } = useGetCandidateDetailsQuery(state.email);
+  const [
+    checkReferral,
+    { data: checkReferralData = {}, isSuccess: isChechkReferralSuccess },
+  ] = useCheckReferralMutation();
+  const [createReferral, { data: createReferralData = [], isReferSuccess }] =
+    useCreateReferralMutation();
   let initialState = {};
   fields.map((field) => {
     if (!["skill"].includes(field.name)) initialState[field.name] = "";
@@ -73,6 +93,27 @@ const ReferCandidate = () => {
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
 
+  useEffect(() => {
+    console.log(valueState);
+  }, [valueState]);
+  useEffect(() => {
+    if (state?.email)
+      setValueState((values) => ({ ...values, email: state?.email }));
+  }, [state]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setValueState((values) => ({
+        ...values,
+        name: data?.name,
+        skills: data?.skills,
+      }));
+    }
+  }, [isSuccess, data]);
+  useEffect(() => {
+    if (isReferSuccess) navigate(`/${role?.toLowerCase()}/referrals/`);
+  }, [isReferSuccess, createReferralData]);
+  useEffect(() => {}, [err]);
   const onChange = (e, fieldName, maxLength = 20) => {
     if (["skill"].includes(fieldName)) {
     } else {
@@ -101,6 +142,17 @@ const ReferCandidate = () => {
   const handleListChange = (list, fieldName) => {
     setValueState((state) => ({ ...state, [fieldName]: list }));
   };
+  const handleSubmit = () => {
+    const referral = {
+      ...valueState,
+      state: "submitted",
+      bonusGiven: "false",
+      employeeId: decodedToken?.id,
+      jobOpeningId: state?.jobId,
+    };
+    console.log(referral);
+    useCreateReferralMutation(referral);
+  };
   return (
     <>
       <ContentHeader title="Refer a friend" />
@@ -110,6 +162,7 @@ const ReferCandidate = () => {
         errors={errState}
         onFieldChange={onChange}
         onListChange={handleListChange}
+        onSubmit={handleSubmit}
       />
     </>
   );

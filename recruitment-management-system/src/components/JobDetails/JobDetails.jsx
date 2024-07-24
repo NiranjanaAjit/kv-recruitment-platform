@@ -12,6 +12,7 @@ import { useGetJobDetailsQuery } from "../../api/jobApi";
 import { useSelector } from "react-redux";
 import { roleEnum } from "../../utils/role.enum";
 import "./JobDetails.scss";
+import { useGetCandidateDetailsQuery } from "../../api/candidateApi";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const JobDetails = () => {
   const field = {
     name: "email",
     label: "email",
-    type: "text",
+    type: "email",
   };
   const { data = [], isSuccess } = useGetJobDetailsQuery(id);
   const role = useSelector((state) => state.auth.userRole);
@@ -49,19 +50,18 @@ const JobDetails = () => {
     }),
     position: position?.name,
   };
-  const [valueState, setValueState] = useState({ email: "" });
-  const [errState, setErrState] = useState({});
+  const [email, setEmail] = useState("");
+  const [errState, setErrState] = useState("");
 
   const onFieldChange = (e) => {
-    setValueState((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
+    setEmail(e.target.value);
   };
 
-  const onSubmit = (id, email) => {
+  const onSubmit = () => {
     console.log(email, id, "Submit Email");
-    //TODO: Implement to backend
+    navigate(`/${role?.toLowerCase()}/refer`, {
+      state: { jobId: id, email: email },
+    });
   };
 
   const descriptionMapper = {
@@ -183,8 +183,8 @@ const JobDetails = () => {
               type={field.type}
               label={field.label}
               name={field.name}
-              value={valueState[field.name]}
-              error={setErrState[field.name]}
+              value={email}
+              error={errState}
               handleChange={(e) =>
                 onFieldChange(e, field.name, field.maxLength)
               }
@@ -193,7 +193,7 @@ const JobDetails = () => {
               <Button
                 className="modal--referbutton"
                 handleSubmit={() => {
-                  onSubmit(id, valueState);
+                  onSubmit();
                 }}
                 text="Continue"
               />

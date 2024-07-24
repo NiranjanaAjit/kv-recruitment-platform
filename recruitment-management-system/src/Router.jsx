@@ -21,6 +21,7 @@ import CreateJob from "./pages/CreateJob/CreateJob";
 import ReferCandidate from "./pages/ReferCandidate/ReferCandidate";
 import EmployeeProfile from "./pages/EmployeeProfile/EmployeeProfile";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
+import AdminReferrals from "./pages/AdminReferrals/AdminReferrals";
 
 function Router() {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ function Router() {
             },
             {
               path: "profile",
-              element: <EmployeeProfile/>,
+              element: <EmployeeProfile />,
             },
           ],
         },
@@ -85,7 +86,7 @@ function Router() {
             },
             {
               path: "referrals",
-              element: <Referrals />,
+              element: <AdminReferrals />,
             },
             {
               path: "jobDetails/:id",
@@ -94,6 +95,10 @@ function Router() {
             {
               path: "employeeList",
               element: <EmployeeList />,
+            },
+            {
+              path: "refer",
+              element: <ReferCandidate />,
             },
             {
               path: "create-job",

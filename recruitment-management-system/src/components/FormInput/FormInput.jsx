@@ -12,6 +12,8 @@ const FormInput = ({
   error,
   disable = false,
 }) => {
+  console.log(value);
+
   const onChange = (e) => {
     if (handleChange) handleChange(e);
   };
