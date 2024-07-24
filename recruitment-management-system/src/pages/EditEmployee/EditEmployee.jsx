@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import ContentHeader from "../../components/Content Header/ContentHeader";
 import Select from "../../components/Select/Select";
 import Form from "../../components/Form/Form";
+import { useParams } from "react-router-dom";
 
 const EditEmployee = () => {
+  const { id } = useParams();
+  console.log(id);
   const positionOptions = [
     {
       value: "Associate software engineer",
@@ -59,10 +62,21 @@ const EditEmployee = () => {
       className: "select-container",
       component: Select,
     },
+    {
+      name: "Employee ID",
+      label: "Employee ID",
+      value: id,
+      disable: true,
+    },
   ];
   let initialState = {};
   fields.map((field) => {
-    initialState[field.name] = "";
+    if (field.name == "Employee ID") {
+      initialState[field.name] = id;
+      console.log(initialState[field.name]);
+    } else {
+      initialState[field.name] = "";
+    }
   });
 
   const [valueState, setValueState] = useState(initialState);
