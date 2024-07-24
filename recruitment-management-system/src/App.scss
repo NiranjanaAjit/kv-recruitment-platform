@@ -1,23 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 
 :root {
-  --primary-color: #00897b;
-  --primary-dark-blue: #1c212d;
-  --primary-light-blue: #43506e;
-  --yellow: #ffd831;
-  --sidebar-width: 100px;
-  --background-grey: #f3f6f9;
-  --green-button: #346865;
-  --font-green: #566d6d;
-  --blue-variant: #03aeee;
-  --pure-white: #ffffff;
-  --white-variant: #fafafa;
-  --black-variant: rgb(84, 83, 83);
-  --font-color-grey: #a3b0c6;
-  --green-light: #f3f8fc;
-  --red-variant: #b83227;
-  background-color: var(--background-grey);
+  --secondary-color: #c4ecfe;
+  --primary-color: #ffffff;
+  --tertiary-color: #05b2f7;
+  --sharp-color: #0b4c8c;
 }
+
 * {
   margin: 0;
   padding: 0;
