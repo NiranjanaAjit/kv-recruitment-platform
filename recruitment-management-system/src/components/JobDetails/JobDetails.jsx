@@ -88,7 +88,9 @@ const JobDetails = () => {
   };
 
   const onRefer = () => {
-    setShowRefer(!showRefer);
+    navigate(`/${role?.toLowerCase()}/refer`, {
+      state: { jobId: id },
+    });
   };
   return (
     <main className="jobdetail--container">

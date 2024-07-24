@@ -10,6 +10,7 @@ import {
   useCreateReferralMutation,
 } from "../../api/referralApi";
 import { useSelector } from "react-redux";
+import Toast from "../../components/Toast/Toast";
 
 const ReferCandidate = () => {
   const skillOptions = [
@@ -78,13 +79,14 @@ const ReferCandidate = () => {
   const token = localStorage.getItem("accessToken");
   const decodedToken = jwtDecode(token);
   console.log(decodedToken);
-  const { data = [], isSuccess } = useGetCandidateDetailsQuery(state.email);
+  // const { data = [], isSuccess } = useGetCandidateDetailsQuery(state.email);
   const [
     checkReferral,
-    { data: checkReferralData = {}, isSuccess: isChechkReferralSuccess },
+    { data: checkReferralData = {}, isSuccess: isCheckReferralSuccess },
   ] = useCheckReferralMutation();
   const [createReferral, { data: createReferralData = [], isReferSuccess }] =
     useCreateReferralMutation();
+
   let initialState = {};
   fields.map((field) => {
     if (!["skill"].includes(field.name)) initialState[field.name] = "";
@@ -92,27 +94,28 @@ const ReferCandidate = () => {
   });
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
+  const [referralErrors, setReferralErrors] = useState([]);
+  const [referralSuccess, setReferralSuccess] = useState([]);
+  const [toastList, setToastList] = useState([]);
 
-  useEffect(() => {
-    console.log(valueState);
-  }, [valueState]);
-  useEffect(() => {
-    if (state?.email)
-      setValueState((values) => ({ ...values, email: state?.email }));
-  }, [state]);
+  // useEffect(() => {
+  //   console.log(valueState);
+  // }, [valueState]);
+  // useEffect(() => {
+  //   if (state?.email)
+  //     setValueState((values) => ({ ...values, email: state?.email }));
+  // }, [state]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      setValueState((values) => ({
-        ...values,
-        name: data?.name,
-        skills: data?.skills,
-      }));
-    }
-  }, [isSuccess, data]);
-  useEffect(() => {
-    if (isReferSuccess) navigate(`/${role?.toLowerCase()}/referrals/`);
-  }, [isReferSuccess, createReferralData]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setValueState((values) => ({
+  //       ...values,
+  //       name: data?.name,
+  //       skills: data?.skills,
+  //     }));
+  //   }
+  // }, [isSuccess, data]);
+
   const onChange = (e, fieldName, maxLength = 20) => {
     if (["skill"].includes(fieldName)) {
     } else {
@@ -142,16 +145,65 @@ const ReferCandidate = () => {
     setValueState((state) => ({ ...state, [fieldName]: list }));
   };
   const handleSubmit = () => {
-    const referral = {
-      ...valueState,
-      state: "submitted",
-      bonusGiven: "false",
-      employeeId: decodedToken?.id,
-      jobOpeningId: state?.jobId,
+    setToastList([]);
+    const checkConditions = {
+      jobId: state?.jobId,
+      employeeId: decodedToken?.userId,
+      email: valueState["email"],
     };
-    console.log(referral);
-    useCreateReferralMutation(referral);
+    checkReferral(checkConditions);
   };
+  useEffect(() => {
+    if (isCheckReferralSuccess) {
+      const alreadyApplied = -checkReferralData?.alreadyApplied;
+      const referralValid = checkReferralData?.referralValid;
+      if (alreadyApplied) {
+        setToastList((toasts) => [
+          ...toasts,
+          {
+            type: "ERROR",
+            message: "You already referred a candidate for this job opening",
+          },
+        ]);
+      }
+      if (!referralValid) {
+        setToastList((toasts) => [
+          ...toasts,
+          {
+            type: "ERROR",
+            message: "This candidate is in a cool-off period currently",
+          },
+        ]);
+      }
+
+      if (!alreadyApplied && referralValid) {
+        const referral = {
+          ...valueState,
+          state: "submitted",
+          bonusGiven: false,
+          employeeId: decodedToken?.userId,
+          jobOpeningId: Number(state?.jobId),
+        };
+        createReferral(referral);
+      }
+    }
+  }, [checkReferralData, isCheckReferralSuccess]);
+  useEffect(() => {
+    console.log(toastList);
+  }, [toastList]);
+  useEffect(() => {
+    if (isReferSuccess) {
+      setToastList((toasts) => [
+        ...toasts,
+        {
+          type: "SUCCESS",
+          message:
+            "The candidate has been successfully referred.You will be redirected to the referrals page shortly.",
+        },
+      ]);
+      setTimeout(() => navigate(`/${role?.toLowerCase()}/referrals/`), 3000);
+    }
+  }, [isReferSuccess, createReferralData]);
   return (
     <>
       <ContentHeader title="Refer a friend" />
@@ -163,6 +215,13 @@ const ReferCandidate = () => {
         onListChange={handleListChange}
         onSubmit={handleSubmit}
       />
+      {toastList ? (
+        <div className="toast-container bottom-right">
+          {toastList?.map((toast, i) => (
+            <Toast key={i} type={toast?.type} message={toast?.message} />
+          ))}
+        </div>
+      ) : null}
     </>
   );
 };

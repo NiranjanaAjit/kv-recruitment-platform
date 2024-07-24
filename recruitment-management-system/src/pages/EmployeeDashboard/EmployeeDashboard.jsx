@@ -5,9 +5,11 @@ import JobsList from "../../components/JobsList/JobsList";
 const EmployeeDashboard = () => {
   const { data = [], isSuccess } = useGetJobListQuery();
 
-  const jobs = data?.map((job) => {
-    if (job?.active)
-      return {
+  let jobs = [];
+  data?.map((job) => {
+    if (job?.active && job?.noOfOpening > 0) {
+      console.log("job:", job?.active, job?.noOfOpening);
+      jobs.push({
         id: job?.id,
         position: job?.position?.name,
         location: job?.location?.toUpperCase(),
@@ -19,7 +21,8 @@ const EmployeeDashboard = () => {
           month: "short",
           year: "numeric",
         }),
-      };
+      });
+    }
   });
   return (
     <>

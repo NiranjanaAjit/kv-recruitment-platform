@@ -1,0 +1,48 @@
+.toast-container {
+  font-size: 14px;
+  position: fixed;
+  z-index: 10;
+  bottom: 1rem;
+  right: 1rem;
+  animation: toast-in-right, 0.8s;
+  //   @include animation("toast-in-right 0.8s");
+  .toast {
+    width: 365px;
+    padding: 15px 15px 15px 10px;
+    background-color: #8c5151;
+    color: #fafafa;
+    font-size: 16px;
+  }
+  .notification {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #999;
+    opacity: 0.9;
+    transition: 0.3s ease;
+  }
+  .notification:hover {
+    box-shadow: 0 0 12px #fff;
+    opacity: 1;
+  }
+  button {
+    float: right;
+  }
+  //   @mixin keyframes($toast-in-right) {
+  //   }
+  //   @keyframes #{$toast-in-right} {
+  //     from {
+  //       transform: translateX(100%);
+  //     }
+  //     to {
+  //       transform: translateX(0);
+  //     }
+  //   }
+  @keyframes toast-in-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}

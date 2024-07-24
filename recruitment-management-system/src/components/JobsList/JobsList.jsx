@@ -15,15 +15,12 @@ const JobsList = ({ jobs }) => {
   const navigate = useNavigate();
   const [showRef, setShowRef] = useState(false);
   const role = useSelector((state) => state.auth.userRole);
-
+  console.log(jobs, "in component");
   const field = {
     name: "email",
     label: "email",
     type: "text",
   };
-  if (role !== roleEnum.ADMIN) {
-    jobs = jobs.filter((job) => job?.active && job?.noOfOpening > 0);
-  }
   const [valueState, setValueState] = useState({ email: "" });
   const [errState, setErrState] = useState([]);
 

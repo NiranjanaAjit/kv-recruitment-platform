@@ -4,8 +4,6 @@ import Button from "../Button/Button";
 import "./Form.scss";
 import { useGetPositionListQuery } from "../../api/positionApi";
 
-
-
 const Form = ({
   fields,
   onFieldChange,
@@ -16,16 +14,11 @@ const Form = ({
   handleAddNew,
   onCancel,
 }) => {
-
- 
-
   return (
     <div className="form-container">
       {console.log(values)}{" "}
       <div className="inputs-container">
         {fields.map((field) => {
-          console.log(values);
-          console.log(values[fields.name]);
           return field.component ? (
             <field.component
               key={field.name}
