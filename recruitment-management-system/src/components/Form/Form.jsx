@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import "./Form.scss";
+import { useGetPositionListQuery } from "../../api/positionApi";
+
+
 
 const Form = ({
   fields,
@@ -10,8 +13,12 @@ const Form = ({
   errors,
   onSubmit,
   onListChange,
+  handleAddNew,
   onCancel,
 }) => {
+
+ 
+
   return (
     <div className="form-container">
       {console.log(values)}{" "}
@@ -25,6 +32,8 @@ const Form = ({
               value={values[field.name]}
               handleListChange={(newList) => onListChange(newList, field.name)}
               handleChange={(e) => onFieldChange(e, field.name)}
+              placeholder={field.label}
+              handleAddNew={handleAddNew}
               {...field}
             />
           ) : (
