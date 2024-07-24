@@ -113,7 +113,6 @@ const ReferCandidate = () => {
   useEffect(() => {
     if (isReferSuccess) navigate(`/${role?.toLowerCase()}/referrals/`);
   }, [isReferSuccess, createReferralData]);
-  useEffect(() => {}, [err]);
   const onChange = (e, fieldName, maxLength = 20) => {
     if (["skill"].includes(fieldName)) {
     } else {

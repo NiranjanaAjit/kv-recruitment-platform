@@ -202,17 +202,15 @@ const JobDetails = () => {
                   type={field.type}
                   label={field.label}
                   name={field.name}
-                  value={valueState[field.name]}
-                  error={setErrState[field.name]}
-                  handleChange={(e) =>
-                    onFieldChange(e, field.name, field.maxLength)
-                  }
+                  value={email}
+                  error={errState}
+                  handleChange={onFieldChange}
                 />
                 <div className="modal--referbuttons">
                   <Button
                     className="modal--referbutton"
                     handleSubmit={() => {
-                      onSubmit(id, valueState);
+                      onSubmit(id, email);
                     }}
                     text="Continue"
                   />
