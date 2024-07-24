@@ -1,6 +1,6 @@
 import apiWithTag from "./baseApi";
 
-const loginApi = apiWithTag.injectEndpoints({
+const referralApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     referral: builder.query({
       query: (payload) => ({
@@ -12,4 +12,4 @@ const loginApi = apiWithTag.injectEndpoints({
   }),
 });
 
-export const { useReferralQuery } = loginApi;
+export const { useReferralQuery } = referralApi;

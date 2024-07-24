@@ -8,7 +8,10 @@ import { Fragment, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import FormInput from "../../components/FormInput/FormInput";
 import { useParams } from "react-router-dom";
-import { useGetJobDetailsQuery } from "../../api/jobApi";
+import {
+  useGetJobDetailsQuery,
+  useDeleteJobDetailsMutation,
+} from "../../api/jobApi";
 import { useSelector } from "react-redux";
 import { roleEnum } from "../../utils/role.enum";
 import "./JobDetails.scss";
@@ -18,6 +21,7 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const [showRefer, setShowRefer] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [closeJob] = useDeleteJobDetailsMutation();
   const field = {
     name: "email",
     label: "email",
@@ -71,7 +75,9 @@ const JobDetails = () => {
   };
 
   const onDelete = (id) => {
-    setShowDelete(!showDelete);
+    closeJob(id);
+    navigate("/admin");
+
     console.log(id);
     //TODO: Integrate Backend
   };
@@ -221,7 +227,7 @@ const JobDetails = () => {
                 <Button
                   className="modal--deletebutton"
                   handleSubmit={() => {
-                    onDelete(empId);
+                    onDelete(id);
                   }}
                   text="Delete"
                 />
