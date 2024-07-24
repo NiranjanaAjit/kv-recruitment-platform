@@ -8,9 +8,34 @@ margin-top:70px
 
 }
 
-.header-underline{
-    border-bottom: 2px solid var(--font-color-grey);
-    width: 100%;
-    display: flex;
-    align-items: center;
+.header-underline {
+  border-bottom: 2px solid var(--font-color-grey);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  .job-card-refer {
+    width: 100px;
+    margin-top: 20px;
+    height: 50px;
+    background-color: var(--primary-dark-blue);
+    border: none;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    transition-duration: 0.2s;
+  }
+
+  .job-card-refer:hover {
+    background-color: #ffffff;
+    color: var(--primary-dark-blue);
+    border: 2px solid var(--primary-dark-blue);
+    transition-duration: 0.2s;
+    cursor: pointer;
+  }
 }
