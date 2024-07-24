@@ -18,7 +18,7 @@ const baseApi = createApi({
 })
 
 const apiWithTag = baseApi.enhanceEndpoints({
-    addTagTypes: ["JOB_LIST","EMPLOYEE_LIST"]
+    addTagTypes: ["JOB_LIST", "REFERRAL_LIST", "EMPLOYEE_LIST"]
 })
 
 export default apiWithTag

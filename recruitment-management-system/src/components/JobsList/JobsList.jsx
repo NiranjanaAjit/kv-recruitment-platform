@@ -9,18 +9,18 @@ import { useState } from "react";
 import { useGetJobListQuery } from "../../api/jobApi";
 import "./JobsList.scss";
 import { useSelector } from "react-redux";
+import { roleEnum } from "../../utils/role.enum";
 
 const JobsList = ({ jobs }) => {
   const navigate = useNavigate();
   const [showRef, setShowRef] = useState(false);
   const role = useSelector((state) => state.auth.userRole);
-
+  console.log(jobs, "in component");
   const field = {
     name: "email",
     label: "email",
     type: "text",
   };
-
   const [valueState, setValueState] = useState({ email: "" });
   const [errState, setErrState] = useState([]);
 
@@ -41,18 +41,18 @@ const JobsList = ({ jobs }) => {
   return (
     <>
       <div className="job-cards-container ">
-        {jobs.map((record) => {
+        {jobs?.map((record) => {
           return (
             <>
               <JobCard
-                key={record.id}
-                id={record.id}
-                position={record.position}
-                location={record.location}
-                created_at={record.createdAt}
-                experience={record.experience}
-                noOfOpening={record.noOfOpening}
-                active={record.active}
+                key={record?.id}
+                id={record?.id}
+                position={record?.position}
+                location={record?.location}
+                created_at={record?.createdAt}
+                experience={record?.experience}
+                noOfOpening={record?.noOfOpening}
+                active={record?.active}
                 onClick={(e, id) => {
                   navigate(`/${role?.toLowerCase()}/jobDetails/${id}`);
                 }}

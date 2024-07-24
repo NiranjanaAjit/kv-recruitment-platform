@@ -21,6 +21,7 @@ import CreateJob from "./pages/CreateJob/CreateJob";
 import ReferCandidate from "./pages/ReferCandidate/ReferCandidate";
 import EmployeeProfile from "./pages/EmployeeProfile/EmployeeProfile";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
+import AdminReferrals from "./pages/AdminReferrals/AdminReferrals";
 import EditEmployee from "./pages/EditEmployee/EditEmployee";
 import EditJob from "./pages/EditJob/EditJob";
 import Notifications from "./pages/Notifications/Nofitications";
@@ -92,7 +93,7 @@ function Router() {
             },
             {
               path: "referrals",
-              element: <Referrals />,
+              element: <AdminReferrals />,
             },
             {
               path: "jobDetails/:id",
@@ -101,6 +102,10 @@ function Router() {
             {
               path: "employeeList",
               element: <EmployeeList />,
+            },
+            {
+              path: "refer",
+              element: <ReferCandidate />,
             },
             {
               path: "employeeList/edit/:id",
