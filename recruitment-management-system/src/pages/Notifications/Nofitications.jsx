@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useGetNotificationsQuery } from "../../api/notificationApi";
+import "./Notifications.scss";
 
 const Notifications = () => {
-  // const [test, setTest] = useState(0);
-  // setTimeout(()=>{
-  //     setTest(test+1);
-  // },1000*10)
+
   const [messages, setMessages] = useState("");
   useEffect(() => {
     console.log(messages);
@@ -29,7 +27,16 @@ const Notifications = () => {
       console.error(err);
     }
   }, 10000);
-  return <div>{messages}</div>;
+
+    return (
+        <div className="notifications-container">
+          {messages?.map((message, index) => (
+            <div key={index} className="notification-message">
+              {message}
+            </div>
+          ))}
+        </div>
+      );
 };
 
 export default Notifications;
