@@ -6,18 +6,14 @@ import Searchbar from "../../components/Searchbar/Searchbar";
 import "./Referrals.scss";
 import { useReferralQuery } from "../../api/referralListApi";
 import { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const Referrals = () => {
   const { data: data, isSuccess: isSuccess } = useReferralQuery();
   console.log(data);
   const [referDetails, setReferDetails] = useState([]);
   const token = localStorage.getItem("accessToken");
-  console.log(token);
-  const base64Url = token.split(".")[1];
-  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  const decodedData = JSON.parse(window.atob(base64));
-
-  console.log(decodedData);
+  const decodedData = jwtDecode(token);
 
   useEffect(() => {
     if (isSuccess) {

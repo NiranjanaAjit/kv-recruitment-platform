@@ -14,8 +14,11 @@ const Form = ({
 }) => {
   return (
     <div className="form-container">
+      {console.log(values)}{" "}
       <div className="inputs-container">
         {fields.map((field) => {
+          console.log(values);
+          console.log(values[fields.name]);
           return field.component ? (
             <field.component
               key={field.name}
@@ -32,6 +35,7 @@ const Form = ({
               name={field.name}
               value={values[field.name]}
               error={errors[field.name]}
+              disable={field.disable}
               handleChange={(e) =>
                 onFieldChange(e, field.name, field.maxLength)
               }

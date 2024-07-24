@@ -5,7 +5,7 @@ import AdderInput from "../../components/AdderInput/AdderInput";
 import ListInput from "../../components/ListInput/ListInput";
 import { useNavigate } from "react-router-dom";
 
-const CreateJob = () => {
+const EditJob = () => {
   const skillOptions = [
     { id: 1, value: "Development", label: "Development" },
     { id: 2, value: "Design", label: "Design" },
@@ -125,7 +125,7 @@ const CreateJob = () => {
   };
   return (
     <>
-      <ContentHeader title="Create Job Posting" />
+      <ContentHeader title="Edit Job Posting" />
       <Form
         fields={fields}
         onFieldChange={onChange}
@@ -139,4 +139,4 @@ const CreateJob = () => {
   );
 };
 
-export default CreateJob;
+export default EditJob;
