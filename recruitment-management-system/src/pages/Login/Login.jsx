@@ -25,7 +25,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
   const onLogin = (e) => {
     console.log(loginCredential);
     e.preventDefault();
@@ -39,7 +38,6 @@ const Login = () => {
       const role = decoded?.position?.toUpperCase();
       dispatch(signIn());
 
-      console.log(decoded, token);
       if (role === roleEnum.ADMIN) {
         dispatch(setRole(role));
         navigate("/admin");
