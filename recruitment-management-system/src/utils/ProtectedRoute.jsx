@@ -7,7 +7,7 @@ const ProtectedRoute = ({ role }) => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const userRole = useSelector((state) => state.auth.userRole);
+  const userRole = useSelector((state) => state?.auth?.userRole);
 
   //   useEffect(() => {
   //     if (!isAuthenticated || !userRole == role)
@@ -15,7 +15,7 @@ const ProtectedRoute = ({ role }) => {
   //   }, [pathname]);
   if (!isAuthenticated) return <Navigate to="/" replace={true} />;
   if (userRole !== role)
-    return <Navigate to={`/${userRole.toLowerCase()}`} replace={true} />;
+    return <Navigate to={`/${userRole?.toLowerCase()}`} replace={true} />;
   return <Outlet />;
 };
 

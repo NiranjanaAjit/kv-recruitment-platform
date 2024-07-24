@@ -1,14 +1,6 @@
 import "./Modal.scss";
 
-const Modal = ({
-  buttonStyle,
-  onClose,
-  value,
-  style,
-  onSubmit,
-  children,
-  className,
-}) => {
+const Modal = ({ onClose, children, className }) => {
   return (
     <>
       <div className="modal--outsidebox">

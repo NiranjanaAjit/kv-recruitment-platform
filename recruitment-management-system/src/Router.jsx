@@ -21,23 +21,19 @@ import CreateJob from "./pages/CreateJob/CreateJob";
 import ReferCandidate from "./pages/ReferCandidate/ReferCandidate";
 import EmployeeProfile from "./pages/EmployeeProfile/EmployeeProfile";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
+import EditEmployee from "./pages/EditEmployee/EditEmployee";
+import EditJob from "./pages/EditJob/EditJob";
 
 function Router() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    // const token = localStorage.getItem("accessToken");
-    // if (!token) return;
-    // dispatch(signIn());
-    // const decoded = jwtDecode(token);
-    const token = localStorage.getItem("accessToken");
-    if (!token) return;
+  const token = localStorage.getItem("accessToken");
+  if (token) {
     dispatch(signIn());
-    const role = localStorage.getItem("role");
-    // const role =
-    // decoded.role === roleEnum.ADMIN ? roleEnum.ADMIN : roleEnum.NORMAL_USER;
-    dispatch(setRole(role));
-  });
-
+    const decodedToken = jwtDecode(token);
+    const role = decodedToken?.position?.toUpperCase();
+    if (role === roleEnum.ADMIN) dispatch(setRole(role));
+    else dispatch(setRole(roleEnum.NORMAL_USER));
+  }
   const route = createBrowserRouter([
     {
       //ADDITION : Login Page and assign
@@ -62,7 +58,7 @@ function Router() {
               element: <Referrals />,
             },
             {
-              path: "jobDetails",
+              path: "jobDetails/:id",
               element: <EmployeeJobDetails />,
             },
             {
@@ -71,7 +67,7 @@ function Router() {
             },
             {
               path: "profile",
-              element: <EmployeeProfile/>,
+              element: <EmployeeProfile />,
             },
           ],
         },
@@ -94,12 +90,16 @@ function Router() {
               element: <Referrals />,
             },
             {
-              path: "jobDetails",
+              path: "jobDetails/:id",
               element: <AdminJobDetails />,
             },
             {
               path: "employeeList",
               element: <EmployeeList />,
+            },
+            {
+              path: "employeeList/edit/:id",
+              element: <EditEmployee />,
             },
             {
               path: "create-job",
@@ -108,6 +108,10 @@ function Router() {
             {
               path: "create-employee",
               element: <CreateEmployee />,
+            },
+            {
+              path: "jobDetails/edit/:id",
+              element: <EditJob />,
             },
           ],
         },
