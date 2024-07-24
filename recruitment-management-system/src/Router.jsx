@@ -23,6 +23,7 @@ import EmployeeProfile from "./pages/EmployeeProfile/EmployeeProfile";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
 import EditEmployee from "./pages/EditEmployee/EditEmployee";
 import EditJob from "./pages/EditJob/EditJob";
+import Notifications from "./pages/Notifications/Nofitications";
 
 function Router() {
   const dispatch = useDispatch();
@@ -69,6 +70,10 @@ function Router() {
               path: "profile",
               element: <EmployeeProfile />,
             },
+            {
+              path: "notifications",
+              element: <Notifications />,
+            },
           ],
         },
       ],
@@ -112,6 +117,10 @@ function Router() {
             {
               path: "jobDetails/edit/:id",
               element: <EditJob />,
+            },
+            {
+              path: "notifications",
+              element: <Notifications />,
             },
           ],
         },
