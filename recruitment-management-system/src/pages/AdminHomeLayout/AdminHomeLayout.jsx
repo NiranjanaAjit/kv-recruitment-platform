@@ -44,7 +44,7 @@ const AdminHomeLayout = () => {
         <Sidebar>
           <div className="side-bar__buttons" onClick={onEmpCreate}>
             <IoIosPersonAdd className="side-bar__button__icons" />
-            <h4 className="side-bar__button__labels">Employee Create</h4>
+            <h4 className="side-bar__button__labels">Create Employee</h4>
           </div>
           <div className="side-bar__buttons" onClick={onJobCreate}>
             <IoMdAdd className="side-bar__button__icons" />
