@@ -21,11 +21,11 @@ const Form = ({
 
   return (
     <div className="form-container">
-      {console.log(values)}{" "}
+      {/* {console.log(values)}{" "} */}
       <div className="inputs-container">
         {fields.map((field) => {
-          console.log(values);
-          console.log(values[fields.name]);
+          console.log(values[field.name]);
+          // console.log(values[fields.name]);
           return field.component ? (
             <field.component
               key={field.name}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-const ListInput = ({ name, label, handleListChange }) => {
+const ListInput = ({ name, label, handleListChange, value }) => {
   const [count, setCount] = useState(0);
-  const [list, setList] = useState([]);
+  console.log(value)
+  const [list, setList] = value?useState(value):useState([]);
   const [currValue, setCurrValue] = useState("");
   useEffect(() => {
     handleListChange(list.map((item) => item?.value));

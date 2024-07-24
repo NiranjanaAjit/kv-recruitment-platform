@@ -3,9 +3,19 @@ import ContentHeader from "../../components/Content Header/ContentHeader";
 import Form from "../../components/Form/Form";
 import AdderInput from "../../components/AdderInput/AdderInput";
 import ListInput from "../../components/ListInput/ListInput";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Modal from "../../components/Modal/Modal";
+import Select from "../../components/Select/Select";
+import { useGetPositionListQuery } from "../../api/positionApi";
+import { useGetJobDetailsQuery } from "../../api/jobApi";
 
 const EditJob = () => {
+
+  const { data, isLoading } = useGetPositionListQuery();
+  const {id}= useParams()
+  const {data: jobData, isLoading: jobIsLoading}= useGetJobDetailsQuery(id);
+  
+
   const skillOptions = [
     { id: 1, value: "Development", label: "Development" },
     { id: 2, value: "Design", label: "Design" },
@@ -38,12 +48,29 @@ const EditJob = () => {
     { id: 29, value: "Blockchain", label: "Blockchain" },
     { id: 30, value: "DevOps", label: "DevOps" },
   ];
+
+  const [positionFields, setPositionFields] = useState([]);
+  useEffect(() => {
+    if (!isLoading) {
+      let positionFieldsDummy = data.map((obj) => ({
+        value: obj.name,
+        display: obj.name,
+      }));
+      setPositionFields(positionFieldsDummy);
+    }
+  }, [isLoading]);
+
+
   const fields = [
     {
       label: "Job Position",
       name: "position",
       type: "text",
       maxLength: 20,
+      component: Select,
+      options: positionFields ? positionFields : [],
+      className: "select-container",
+      newPositionButton: true,
     },
     {
       label: "Experience",
@@ -81,19 +108,44 @@ const EditJob = () => {
       keyName: "point",
       component: ListInput,
     },
+    {
+      name: "id",
+      label: "Job ID",
+      disable: true,
+    },
   ];
+
+  const [modal, setModal] = useState(false);
+
   let initialState = {};
-  fields.map((field) => {
-    if (!["responsibility", "skill", "qualification"].includes(field.name))
-      initialState[field.name] = "";
-    else initialState[field.name] = [];
-  });
+
+  useEffect(()=>{
+
+    if(!jobIsLoading){
+      initialState.position = jobData.position.name;
+      initialState.experience = jobData.experience;
+      initialState.location = jobData.location;
+      initialState.noOfOpening = jobData.noOfOpening;
+      initialState.skill = jobData.skill;
+      initialState.responsibility = jobData.description.responsibility;
+      initialState.qualification = jobData.description.qualification
+      initialState.id = id
+     }
+  },[jobIsLoading])
+  // fields.map((field) => {
+  //   if (!["responsibility", "skill", "qualification"].includes(field.name))
+  //     initialState[field.name] = "";
+  //   else initialState[field.name] = [];
+  // });
 
   const navigate = useNavigate();
-  const [valueState, setValueState] = useState(initialState);
+  const [valueState, setValueState] = useState({});
+  useEffect(()=>{
+    setValueState(initialState)
+  },[])
   const [errState, setErrState] = useState(initialState);
   const onChange = (e, fieldName, maxLength = 20) => {
-    if (["responsibility", "skill", "qualification"].includes(fieldName)) {
+    if (["responsibility", "skill", "qualification","position"].includes(fieldName)) {
     } else {
       if (e.target.value.length > maxLength) {
         setErrState((state) => ({
@@ -124,8 +176,20 @@ const EditJob = () => {
     console.log(valueState);
   };
   return (
-    <>
+    <div className="edit-job-container">
       <ContentHeader title="Edit Job Posting" />
+      {modal ? (
+        <Modal
+          className={"add-new-position-modal"}
+          onClose={() => {
+            setModal(false);
+          }}
+        >
+          <AddNewPositionContent modalClose={setModal} />
+        </Modal>
+      ) : (
+        <></>
+      )}
       <Form
         fields={fields}
         onFieldChange={onChange}
@@ -135,7 +199,7 @@ const EditJob = () => {
         onSubmit={handleSubmit}
         onCancel={() => navigate("/admin")}
       />
-    </>
+    </div>
   );
 };
 
