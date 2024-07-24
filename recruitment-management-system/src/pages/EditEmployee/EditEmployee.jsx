@@ -1,18 +1,27 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import ContentHeader from "../../components/Content Header/ContentHeader";
 import Select from "../../components/Select/Select";
 import Form from "../../components/Form/Form";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useEditEmployeeListMutation,
+  useGetEmployeeListByIdQuery,
+} from "../../api/employeeApi";
 import { useGetPositionListQuery } from "../../api/positionApi";
-import { usePostEmployeeListMutation } from "../../api/employeeApi";
-import { useNavigate } from "react-router-dom";
 
-const CreateEmployee = () => {
+const EditEmployee = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { data: getPositions, isSuccess: success } = useGetPositionListQuery();
-  const [postEmployee] = usePostEmployeeListMutation();
+  const [updateEmployee] = useEditEmployeeListMutation();
+  const { data: getEmployeeById, isSuccess } = useGetEmployeeListByIdQuery({
+    id,
+  });
+  const [data, setData] = useState({});
   const [positionData, setPositionData] = useState([
     { value: "", display: "" },
   ]);
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (success) {
       setPositionData(
@@ -23,6 +32,24 @@ const CreateEmployee = () => {
       );
     }
   }, [getPositions, success]);
+
+  useEffect(() => {
+    isSuccess ? setData(getEmployeeById) : setData({});
+  }, [getEmployeeById, isSuccess]);
+
+  useEffect(() => {
+    if (data) {
+      const position = data.position;
+      setValueState({
+        name: data.name,
+        position: position?.name,
+        experience: data.experience,
+        email: data.email,
+        password: data.password ? data.password : "",
+        id: id,
+      });
+    }
+  }, [data]);
 
   const positionOptions = [
     {
@@ -74,17 +101,35 @@ const CreateEmployee = () => {
     {
       name: "position",
       label: "Position",
+      placeholder: "Position",
       options: positionData ? positionData : positionOptions,
       className: "select-container",
       component: Select,
     },
+    {
+      name: "id",
+      label: "Employee ID",
+      value: id,
+      disable: true,
+    },
   ];
   let initialState = {};
   fields.map((field) => {
-    initialState[field.name] = "";
+    if (field.name == "Employee ID") {
+      initialState[field.name] = id;
+    } else {
+      initialState[field.name] = "";
+    }
   });
 
-  const [valueState, setValueState] = useState(initialState);
+  const [valueState, setValueState] = useState({
+    name: "",
+    position: "",
+    experience: "",
+    email: "",
+    password: "",
+    id: id,
+  });
   const [errState, setErrState] = useState(initialState);
 
   const onChange = (e, fieldName, maxLength = 20) => {
@@ -107,28 +152,35 @@ const CreateEmployee = () => {
         }));
       }
     }
+    // if (fieldName == "password") {
+    //   setValueState((state) => ({
+    //     ...state,
+    //     [e.target.name]: e.target.value == "" ? undefined : e.target.value,
+    //   }));
+    // } else {
     setValueState((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
   };
   const handleSubmit = () => {
-    console.log(valueState);
-    postEmployee(valueState);
+    updateEmployee({ id, payload: valueState });
     navigate(-1);
   };
   return (
     <>
-      <ContentHeader title="Add employee" />
-      <Form
-        fields={fields}
-        onFieldChange={onChange}
-        values={valueState}
-        errors={errState}
-        onSubmit={handleSubmit}
-      />
+      <div className="editemployee">
+        <ContentHeader title="Edit Employee" />
+        <Form
+          fields={fields}
+          onFieldChange={onChange}
+          values={valueState}
+          errors={errState}
+          onSubmit={handleSubmit}
+        />
+      </div>
     </>
   );
 };
 
-export default CreateEmployee;
+export default EditEmployee;

@@ -10,13 +10,17 @@ import { MdEditSquare } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";
+import {
+  useDeleteEmployeeListByIdMutation,
+  useGetEmployeeListQuery,
+} from "../../api/employeeApi";
 
 const EmployeeList = () => {
   let { id } = useParams();
   const navigate = useNavigate();
   const [showDelete, setShowDelete] = useState(false);
   const [empId, setEmpId] = useState(0);
-  const dispatch = useDispatch();
+  const [empDelete] = useDeleteEmployeeListByIdMutation();
   const [empDetails, setEmpDetails] = useState([
     {
       name: "Harry",
@@ -60,36 +64,30 @@ const EmployeeList = () => {
     },
   ]);
 
-  // let status = useSelector((state) => {
-  //   return state.employee.status;
-  // });
+  const { data, isSuccess } = useGetEmployeeListQuery();
+  useEffect(() => {
+    if (isSuccess) {
+      const employees = data.map((emp) => ({
+        ...emp,
+        joiningDate: new Date(emp.createdAt).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+      }));
 
-  // const { data, isSuccess } = useGetEmployeeListQuery();
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     const employees = data.map((emp) => ({
-  //       ...emp,
-  //       joiningDate: new Date(emp.createdAt).toLocaleDateString("en-GB", {
-  //         day: "numeric",
-  //         month: "short",
-  //         year: "numeric",
-  //       }),
-  //     }));
-  //     setEmpDetails(
-  //       status === "All"
-  //         ? employees
-  //         : employees.filter((employee) => employee.status === status)
-  //     );
-  //   }
-  // }, [data, isSuccess, status]);
+      setEmpDetails(employees);
+    }
+  }, [data, isSuccess]);
 
   // const empHeaders = EmpDetails.headers;
 
   const empHeaders = {
     name: "Employee Name",
     id: "Employee ID",
-    empJD: "Joining Date",
-    Status: "Status",
+    joiningDate: "Joining Date",
+    experience: "Experience",
+
     Action: "Action",
   };
 
@@ -97,36 +95,9 @@ const EmployeeList = () => {
     navigate(`edit/${id}`);
   };
 
-  const onCreate = (id) => {
-    navigate("create");
-  };
-
-  const onSelect = (e, id) => {
-    e.stopPropagation();
-    navigate(`details/${id}`);
-  };
-
   const onDelete = (id) => {
-    // const action = {
-    //   type: actionTypes.DELETE_EMPLOYEES,
-    //   payload: id,
-    // };
     setShowDelete(false);
-    deleteEmp({ id: id });
-  };
-
-  const onFilter = (e, action) => {
-    // dispatch({
-    //   type: actionTypes.FILTER_EMPLOYEES,
-    //   payload: action,
-    // });
-    dispatch(filterEmployee(action));
-  };
-
-  const color = {
-    Active: "Active",
-    Probation: "Probation",
-    Inactive: "Inactive",
+    empDelete({ id });
   };
 
   const actions = (id) => {
@@ -168,11 +139,19 @@ const EmployeeList = () => {
               <h1>Employee List</h1>
               {/* TODO: ADD FILTER */}
             </div>
+            <div className="header--buttons">
+              <Button
+                className="create--button"
+                text="Create Employee"
+                handleSubmit={() => {
+                  navigate("/admin/create-employee");
+                }}
+              ></Button>
+            </div>
           </div>
           <GridRows
             Headers={empHeaders}
             Details={empDetails}
-            color={color}
             actions={actions}
           ></GridRows>
           {showDelete && (

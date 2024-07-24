@@ -5,66 +5,49 @@ $breakpoint-tablet: 768px;
   height: 100vh;
   width: 100vw;
   padding: 30px;
-  background-color: black;
+  background-color: var(--secondary-color);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-
-
-
-  // .hero {
-  //   background-color: #e6f7fd;
-  //   width: 50%;
-  //   display: flex;
-  //   border-radius: 3px;
-  //   align-items: center;
-  //   justify-content: center;
-  // }
-  // .login--image {
-  //   border-radius: 50%;
-  //   width: 500px;
-  //   height: 500px;
-  //   border: 30px solid rgb(250, 248, 248);
-  // }
-
-
- 
   
-  .blue-blur-box{
-    width: 800px;
-  height: 800px;
-  background: var(--primary-light-blue);
-  right: 100px;
-  // top: 2%;
-  border-radius: 30%;
-  opacity: .3;
-  filter: blur(2000px);
-  position: absolute;
-  pointer-events: none;
-  }
-  .yellow-blur-box{
-    width: 800px;
-  height: 800px;
-  background: var(--yellow);
-  left: 100px;
-  // top: 33%;
-  border-radius: 50%;
-  opacity: .15;
-  filter: blur(2000px);
-  position: absolute;
-  pointer-events: none;
-  }
+  // .blue-blur-box{
+  //   width: 800px;
+  // height: 800px;
+  // background: var(--primary-light-blue);
+  // right: 100px;
+  // // top: 2%;
+  // border-radius: 30%;
+  // opacity: .3;
+  // filter: blur(2000px);
+  // position: absolute;
+  // pointer-events: none;
+  // }
+  // .yellow-blur-box{
+  //   width: 800px;
+  // height: 800px;
+  // background: var(--yellow);
+  // left: 100px;
+  // // top: 33%;
+  // border-radius: 50%;
+  // opacity: .15;
+  // filter: blur(2000px);
+  // position: absolute;
+  // pointer-events: none;
+  // }
+
 }
 
 .login {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   padding: 30px;
-  height: 500px;
-  box-shadow: 0px 0px 20px 1px #ffffff3d;
+  height: 550px;
+  width: 500px;
+  // box-shadow: 0px 0px 20px 1px #ffffff3d;
+  border-radius: 5%;
 
   .logo {
     width: 200px;
@@ -90,17 +73,21 @@ $breakpoint-tablet: 768px;
   input {
     padding: 15px 12px;
     width: 370px;
-    border-radius: 7px;
+    border-radius: 15px;
     border-style: solid;
     border-width: 1px;
-    border-color: #00000093;
+    border-color: var(--tertiary-color);
+    background-color: var(--primary-color);
+    font-size: large;
+    color: var(--tertiary-color);
+    color: var(--sharp-color)
   }
 
   input:focus {
     outline: none;
-    border-color: var(--primary-dark-blue);
+    border-color: var(--tertiary-color);
     border-width: 2px;
-    caret-color: var(--primary-dark-blue);
+    // caret-color: var(--primary-dark-blue);
   }
 }
 
@@ -110,30 +97,31 @@ $breakpoint-tablet: 768px;
   label {
     position: absolute;
     margin: 15px;
-    color: grey;
+    color:  var(--tertiary-color);
     left: 0px;
+    background-color: var(--primary-color);
   }
   .eye {
     position: absolute;
     margin: 15px;
     right: 0px;
-    background-color: #ffffff;
+    background-color: var(--primary-color);
     border: none;
   }
 
   input:focus + label {
     transform: translateY(-25px);
     font-size: 15px;
-    color: var(--primary-dark-blue);
-    background-color: #ffffff;
+    color: var(--tertiary-color);
+    background-color: var(--primary-color);
     transition: ease-out 0.25s;
   }
   input:not(:placeholder-shown) + label {
     transform: translateY(-24px);
     font-size: 15px;
-    color: #000000;
-    background-color: #ffffff;
-  }
+    color:  var(--tertiary-color);  
+    background-color: var(--primary-color); 
+    }
 }
 
 .error {
@@ -146,23 +134,22 @@ $breakpoint-tablet: 768px;
   text-align: center;
   display: inline-block;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   margin-right: 15px;
+  height: 60px;
   border-style: solid;
   border-width: 2px;
-  background-color: var(--yellow);
-  color: var(--primary-dark-blue);
+  background-color: var(--tertiary-color);
+  color: var(--sharp-color);
   font-size: 15px;
   font-weight: 800;
-  border-color: var(--primary-dark-blue);
+  border-color: var(--tertiary-color);
 }
 
 .login--layout-button:hover{
   cursor: pointer;
-  background-color: var(--primary-dark-blue);
-  color: var(--yellow);
-  border-color: var(--yellow);
-
+  background-color: var(--sharp-color);
+  color: var(--primary-color);
 }
 @media screen and (max-width: $breakpoint-tablet) {
   .login--layout {

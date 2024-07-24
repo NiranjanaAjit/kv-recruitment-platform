@@ -8,7 +8,11 @@ import { Fragment, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import FormInput from "../../components/FormInput/FormInput";
 import { useParams } from "react-router-dom";
-import { useGetJobDetailsQuery } from "../../api/jobApi";
+import {
+  useGetJobDetailsQuery,
+  useDeleteJobDetailsMutation,
+  usePutJobDetailsMutation,
+} from "../../api/jobApi";
 import { useSelector } from "react-redux";
 import { roleEnum } from "../../utils/role.enum";
 import "./JobDetails.scss";
@@ -17,7 +21,9 @@ import { useGetCandidateDetailsQuery } from "../../api/candidateApi";
 const JobDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [showRef, setShowRef] = useState(false);
+  const [showRefer, setShowRefer] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [deactivateJob] = usePutJobDetailsMutation();
   const field = {
     name: "email",
     label: "email",
@@ -69,10 +75,20 @@ const JobDetails = () => {
     qualification: "Qualifications",
   };
 
-  const onRefer = () => {
-    // TODO: EMAIL MODAL
+  const onDelete = (id, skills) => {
+    const payload = {
+      active: false,
+      skills: skills,
+    };
+    //TODO: SKILLS NOT REQUIRED IF FIXED IN DTO
+    deactivateJob({ id, payload });
+    navigate("/admin");
 
-    setShowRef(!showRef);
+    console.log(id);
+  };
+
+  const onRefer = () => {
+    setShowRefer(!showRefer);
   };
   return (
     <main className="jobdetail--container">
@@ -83,7 +99,7 @@ const JobDetails = () => {
             {<MdLocationOn size={20} />}
             {jobDetail?.location?.toUpperCase()}
           </div>
-          <div className="heder--status">
+          <div className="header--status">
             {jobDetail?.active ? "Active" : "Inactive"}
           </div>
         </div>
@@ -105,7 +121,7 @@ const JobDetails = () => {
                     Edit
                   </>
                 }
-                handleSubmit={() => onEdit(id)}
+                handleSubmit={() => navigate(`/admin/jobDetails/edit/${id}`)}
               ></Button>
               <Button
                 className="delete--button"
@@ -115,7 +131,7 @@ const JobDetails = () => {
                     Close
                   </>
                 }
-                handleSubmit={() => onDelete(id)}
+                handleSubmit={() => setShowDelete(!showDelete)}
               ></Button>
             </>
           )}
@@ -169,42 +185,66 @@ const JobDetails = () => {
           <br />
         </div>
       </div>
-      {showRef && (
+      {(showRefer || showDelete) && (
         <>
           <Modal
             onClose={() => {
-              setShowRef(false);
+              setShowRefer(false);
+              setShowDelete(false);
             }}
             className={"employeeList"}
           >
-            <h3>Enter Candidate's Email</h3>
-            <FormInput
-              key={field.name}
-              type={field.type}
-              label={field.label}
-              name={field.name}
-              value={email}
-              error={errState}
-              handleChange={(e) =>
-                onFieldChange(e, field.name, field.maxLength)
-              }
-            />
-            <div className="modal--referbuttons">
-              <Button
-                className="modal--referbutton"
-                handleSubmit={() => {
-                  onSubmit();
-                }}
-                text="Continue"
-              />
-              <Button
-                className="modal--refercancelbutton"
-                handleSubmit={() => {
-                  setShowRef(false);
-                }}
-                text="Cancel"
-              />
-            </div>
+            {showRefer && (
+              <div>
+                <h3>Enter Candidate's Email</h3>
+                <FormInput
+                  key={field.name}
+                  type={field.type}
+                  label={field.label}
+                  name={field.name}
+                  value={valueState[field.name]}
+                  error={setErrState[field.name]}
+                  handleChange={(e) =>
+                    onFieldChange(e, field.name, field.maxLength)
+                  }
+                />
+                <div className="modal--referbuttons">
+                  <Button
+                    className="modal--referbutton"
+                    handleSubmit={() => {
+                      onSubmit(id, valueState);
+                    }}
+                    text="Continue"
+                  />
+                  <Button
+                    className="modal--refercancelbutton"
+                    handleSubmit={() => {
+                      setShowRefer(false);
+                    }}
+                    text="Cancel"
+                  />
+                </div>
+              </div>
+            )}
+            {showDelete && (
+              <div>
+                <h3>Are you sure you want to close this job opening?</h3>
+                <Button
+                  className="modal--deletebutton"
+                  handleSubmit={() => {
+                    onDelete(id, jobDetail.skills);
+                  }}
+                  text="Delete"
+                />
+                <Button
+                  className="modal--cancelbutton"
+                  handleSubmit={() => {
+                    setShowDelete(false);
+                  }}
+                  text="Cancel"
+                />
+              </div>
+            )}
           </Modal>
         </>
       )}

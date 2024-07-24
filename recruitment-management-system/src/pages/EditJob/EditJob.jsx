@@ -3,50 +3,9 @@ import ContentHeader from "../../components/Content Header/ContentHeader";
 import Form from "../../components/Form/Form";
 import AdderInput from "../../components/AdderInput/AdderInput";
 import ListInput from "../../components/ListInput/ListInput";
-import Select from "../../components/Select/Select";
-import Modal from "../../components/Modal/Modal";
-import "../CreateJob/CreateJob.scss";
-import FormInput from "../../components/FormInput/FormInput";
-import Button from "../../components/Button/Button";
-import {
-  useAddPositionMutation,
-  useGetPositionListQuery,
-} from "../../api/positionApi";
-import { useCreateJobDetailsMutation } from "../../api/jobApi";
+import { useNavigate } from "react-router-dom";
 
-const AddNewPositionContent = ({ modalClose }) => {
-  const [position, setPosition] = useState("");
-  const [addPosition] = useAddPositionMutation();
-
-  const handleFieldChange = (e) => {
-    setPosition(e.target.value);
-  };
-  const addNewPositionSubmit = () => {
-    addPosition({ name: position });
-    modalClose(false);
-  };
-
-  return (
-    <div className="add-new-position-container">
-      <FormInput
-        label={"Enter new position"}
-        value={position}
-        handleChange={handleFieldChange}
-      />
-      <Button
-        text="Add"
-        className={"add-new-position-button"}
-        handleSubmit={addNewPositionSubmit}
-      />
-    </div>
-  );
-};
-
-const CreateJob = () => {
-  const [createJob] = useCreateJobDetailsMutation();
-
-  const { data, isLoading } = useGetPositionListQuery();
-
+const EditJob = () => {
   const skillOptions = [
     { id: 1, value: "Development", label: "Development" },
     { id: 2, value: "Design", label: "Design" },
@@ -71,11 +30,7 @@ const CreateJob = () => {
     { id: 21, value: "Docker", label: "Docker" },
     { id: 22, value: "AWS", label: "AWS" },
     { id: 23, value: "Azure", label: "Azure" },
-    {
-      id: 24,
-      value: "Google Cloud Platform",
-      label: "Google Cloud Platform",
-    },
+    { id: 24, value: "Google Cloud Platform", label: "Google Cloud Platform" },
     { id: 25, value: "Machine Learning", label: "Machine Learning" },
     { id: 26, value: "Data Science", label: "Data Science" },
     { id: 27, value: "Cybersecurity", label: "Cybersecurity" },
@@ -83,57 +38,12 @@ const CreateJob = () => {
     { id: 29, value: "Blockchain", label: "Blockchain" },
     { id: 30, value: "DevOps", label: "DevOps" },
   ];
-
-  // ----------------------------------------------------------
-
-  const positionOptions = [
-    {
-      value: "Associate software engineer",
-      display: "Associate software engineer",
-    },
-    {
-      value: "Software Engineer",
-      display: "Software Engineer",
-    },
-    {
-      value: "Sr. Software Engineer",
-      display: "Sr. Software Engineer",
-    },
-    {
-      value: "Associate Technical Lead",
-      display: "Associate Technical Lead",
-    },
-    {
-      value: "HR manager",
-      display: "HR manager",
-    },
-    {
-      value: "Product manager",
-      display: "Product manager",
-    },
-  ];
-
-  const [positionFields, setPositionFields] = useState([]);
-  useEffect(() => {
-    if (!isLoading) {
-      let positionFieldsDummy = data.map((obj) => ({
-        value: obj.name,
-        display: obj.name,
-      }));
-      setPositionFields(positionFieldsDummy);
-    }
-  }, [isLoading]);
-
   const fields = [
     {
       label: "Job Position",
       name: "position",
       type: "text",
       maxLength: 20,
-      component: Select,
-      options: positionFields ? positionFields : [],
-      className: "select-container",
-      newPositionButton: true,
     },
     {
       label: "Experience",
@@ -172,22 +82,18 @@ const CreateJob = () => {
       component: ListInput,
     },
   ];
-
-  const [modal, setModal] = useState(false);
   let initialState = {};
   fields.map((field) => {
     if (!["responsibility", "skill", "qualification"].includes(field.name))
       initialState[field.name] = "";
     else initialState[field.name] = [];
   });
+
+  const navigate = useNavigate();
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
   const onChange = (e, fieldName, maxLength = 20) => {
-    if (
-      ["responsibility", "skill", "qualification", "position"].includes(
-        fieldName
-      )
-    ) {
+    if (["responsibility", "skill", "qualification"].includes(fieldName)) {
     } else {
       if (e.target.value.length > maxLength) {
         setErrState((state) => ({
@@ -214,42 +120,12 @@ const CreateJob = () => {
   const handleListChange = (list, fieldName) => {
     setValueState((state) => ({ ...state, [fieldName]: list }));
   };
-
-  const addNewPosition = () => {
-    setModal(true);
-  };
   const handleSubmit = () => {
-    console.log(valueState, "papadam");
-    const payload = {
-      position: valueState.position,
-      description: {
-        responsibility: valueState.responsibility,
-        qualification: valueState.qualification,
-      },
-      location: valueState.location,
-      skills: valueState.skill,
-      experience: valueState.experience,
-      noOfOpening: Number(valueState.noOfOpening),
-      active: true,
-    };
-    createJob(payload);
+    console.log(valueState);
   };
   return (
-    <div className="create-new-job-container">
-      <ContentHeader title="Create Job posting" />
-      {modal ? (
-        <Modal
-          className={"add-new-position-modal"}
-          onClose={() => {
-            setModal(false);
-          }}
-        >
-          {" "}
-          <AddNewPositionContent modalClose={setModal} />{" "}
-        </Modal>
-      ) : (
-        <></>
-      )}
+    <>
+      <ContentHeader title="Edit Job Posting" />
       <Form
         fields={fields}
         onFieldChange={onChange}
@@ -257,10 +133,10 @@ const CreateJob = () => {
         values={valueState}
         errors={errState}
         onSubmit={handleSubmit}
-        handleAddNew={addNewPosition}
+        onCancel={() => navigate("/admin")}
       />
-    </div>
+    </>
   );
 };
 
-export default CreateJob;
+export default EditJob;

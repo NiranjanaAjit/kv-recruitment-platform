@@ -7,6 +7,8 @@ const Select = ({
   value,
   className,
   handleChange,
+  newPositionButton,
+  handleAddNew
 }) => {
   return (
     <div className="input-group">
@@ -25,6 +27,9 @@ const Select = ({
             {option.display}
           </option>
         ))}
+        <option value=""  onClick={handleAddNew} style={{display: newPositionButton ? "block" : "none"}}>
+        + Add new position
+        </option>
       </select>
     </div>
   );
