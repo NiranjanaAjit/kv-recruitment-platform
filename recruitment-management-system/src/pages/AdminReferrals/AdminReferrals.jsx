@@ -12,12 +12,14 @@ const AdminReferrals = () => {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   const decodedData = JSON.parse(window.atob(base64));
+  const [filterBy, setFilterBy] = useState("");
+  const [searchBy, setSearchBy] = useState("");
+  const [filteredReferDetails, setFilteredReferDetails] = useState([]);
 
   useEffect(() => {
     if (isSuccess) {
       let ref = data.map((Object) => {
         const jobOpening = Object?.jobOpening;
-        // console.log(jobOpening);
         const referralId = Object?.id;
         const position = jobOpening?.position;
         const referrer = Object.referrer;
@@ -32,10 +34,12 @@ const AdminReferrals = () => {
           referred_by: referrer?.name,
           status,
           bonusGiven,
+          email: referee?.email,
         };
       });
 
       setReferDetails(ref);
+      setFilteredReferDetails(ref);
     }
   }, [data, isSuccess]);
 
@@ -52,7 +56,49 @@ const AdminReferrals = () => {
   const filterOptions = [
     { value: "email", display: "Candidate email" },
     { value: "referral_id", display: "Referral ID" },
+    { value: "all", display: "All" },
   ];
+
+  useEffect(() => {
+    if (searchBy && filterBy) {
+      if (filterBy !== "all") {
+        if (filterBy === "referral_id") {
+          setFilteredReferDetails(
+            referDetails.filter((value) => value.id == searchBy)
+          );
+        } else {
+          setFilteredReferDetails(
+            referDetails.filter((value) => value.email == searchBy)
+          );
+        }
+      } else {
+        setFilteredReferDetails(referDetails);
+      }
+    }
+  }, [filteredReferDetails]);
+
+  const onSearch = (e) => {
+    if (searchBy && filterBy) {
+      filterBy !== "all"
+        ? filterBy == "referral_id"
+          ? setFilteredReferDetails(
+              filteredReferDetails.filter((value) => value.id == searchBy)
+            )
+          : setFilteredReferDetails(
+              filteredReferDetails.filter((value) => value.email == searchBy)
+            )
+        : setFilteredReferDetails(referDetails);
+    }
+  };
+
+  const onFilterChange = (e) => {
+    setFilterBy(e.target.value);
+  };
+
+  const valueChange = (e) => {
+    setSearchBy(e.target.value);
+  };
+
   return (
     <>
       <section className="section-header">
@@ -62,8 +108,9 @@ const AdminReferrals = () => {
             name="filter"
             placeholder="Filter by"
             options={filterOptions}
+            handleChange={onFilterChange}
           />
-          <Searchbar />
+          <Searchbar onSubmit={(e) => onSearch(e)} onChange={valueChange} />
         </div>
       </section>
       <section className="referrals-section">
@@ -74,7 +121,7 @@ const AdminReferrals = () => {
             ))}
           </div>
         </section>
-        {referDetails.map((referral) => (
+        {filteredReferDetails.map((referral) => (
           <ReferralLine key={referral.id} referral={referral} />
         ))}
       </section>
