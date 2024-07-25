@@ -27,12 +27,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     padding: 10px;
     color: var(--tertiary-color);
 
     .logee-data {
       display: flex;
       flex-direction: column;
+      text-transform: capitalize;
+
 
       .logee-data-name {
         font-weight: 600;
@@ -50,6 +53,12 @@
       .icon {
         height: 40px;
         width: 40px;
+
+      }
+
+      .bell-icon{
+        height: 30px;
+        width: 30px;
       }
     }
   }

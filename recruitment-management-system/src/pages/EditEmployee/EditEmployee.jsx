@@ -81,17 +81,17 @@ const EditEmployee = () => {
     {
       name: "name",
       label: "Employee Name",
-      maxLength: 30,
+      maxLength: 100,
     },
     {
       name: "email",
       label: "Email",
-      maxLength: 30,
+      maxLength: 100,
     },
     {
       name: "experience",
       label: "Experience",
-      maxLength: 15,
+      maxLength: 100,
     },
     {
       name: "password",
@@ -132,7 +132,7 @@ const EditEmployee = () => {
   });
   const [errState, setErrState] = useState(initialState);
 
-  const onChange = (e, fieldName, maxLength = 20) => {
+  const onChange = (e, fieldName, maxLength = 100) => {
     if (["position"].includes(fieldName)) {
     } else {
       if (e.target.value.length > maxLength) {

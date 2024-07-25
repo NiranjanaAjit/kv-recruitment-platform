@@ -105,7 +105,7 @@ const CreateJob = () => {
       label: "Job Position",
       name: "position",
       type: "text",
-      maxLength: 20,
+      maxLength: 100,
       component: Select,
       options: positionFields ? positionFields : [],
       className: "select-container",
@@ -115,13 +115,13 @@ const CreateJob = () => {
       label: "Experience",
       name: "experience",
       type: "text",
-      maxLength: 10,
+      maxLength: 100,
     },
     {
       label: "Location",
       name: "location",
       type: "text",
-      maxLength: 20,
+      maxLength: 100,
     },
     {
       label: "No of openings",
@@ -159,7 +159,7 @@ const CreateJob = () => {
   console.log(initialState)
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
-  const onChange = (e, fieldName, maxLength = 20) => {
+  const onChange = (e, fieldName, maxLength = 100) => {
     if (
       ["responsibility", "skill", "qualification", "position"].includes(
         fieldName

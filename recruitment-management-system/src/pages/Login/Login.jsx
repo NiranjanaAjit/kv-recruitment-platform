@@ -99,7 +99,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              onChange={(e) => handleChange(e, 20)}
+              onChange={(e) => handleChange(e, 100)}
               value={loginCredential.username}
               error={errors.email}
               ref={usernameRef}
@@ -109,7 +109,7 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
-              onChange={(e) => handleChange(e, 30)}
+              onChange={(e) => handleChange(e, 100)}
               error={errors.password}
               value={loginCredential.password}
             />
