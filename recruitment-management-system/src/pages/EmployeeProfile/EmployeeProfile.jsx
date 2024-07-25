@@ -1,17 +1,26 @@
+import { useEffect, useState } from "react"
+import { useGetReferralByEmployeeQuery } from "../../api/referralApi"
 import ContentHeader from "../../components/Content Header/ContentHeader"
 import GridRows from "../../components/GridRows/GridRows"
+import { jwtDecode } from "jwt-decode"
 
 const EmployeeProfile = ()=>{
-    const headers={
-        "candidateID" : "Candidate ID",
-        "candidateName" : "Candidate Name",
-        "role": "Software Developer",
-        "joiningDate": "Joining Date",
+    const rewardsHeaders={
+        "id" : "Candidate ID",
+        "name" : "Candidate Name",
+        "positionName": "Position",
+        "status": "Status",
         "action": ""
 
     }
+    const headers={
+      "id" : "Candidate ID",
+      "name" : "Candidate Name",
+      "positionName": "Position",
+      "status": "Status"
+  }
 
-    const details = [
+    const detailss = [
         {
           "candidateID": "1",
           "candidateName": "John Doe",
@@ -31,15 +40,26 @@ const EmployeeProfile = ()=>{
           "joiningDate": "2024-07-22"
         }
       ]
-      
-      
+      const userData = localStorage.getItem("accessToken");
+	const decode = jwtDecode(userData);
+      const {data, isSuccess} = useGetReferralByEmployeeQuery(decode.userId);
+      const [details, setDetails] = useState([])
+      useEffect(()=>{
+
+        if (isSuccess){
+          setDetails(data)
+          console.log(details)
+        }
+      },[isSuccess])
+
+      const rewardsDetails = details.filter((obj)=>obj.status=="accepted")
 
     return(
         <div className="employee-profile-container">
             <ContentHeader title="Profile"/>
             <section className="my-rewards">
                 <h2 className="my-reward-heading">My Rewards</h2>
-                <GridRows Headers={headers} Details={details} />
+                <GridRows Headers={rewardsHeaders} Details={rewardsDetails} />
             </section>
             <section className="my-referrals">
             <h2 className="my-reward-heading">My Referrals</h2>

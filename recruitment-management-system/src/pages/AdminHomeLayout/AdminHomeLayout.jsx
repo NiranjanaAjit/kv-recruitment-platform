@@ -62,11 +62,11 @@ const AdminHomeLayout = () => {
             <IoIosPeople className="side-bar__button__icons" />{" "}
             <h4 className="side-bar__button__labels">Referrals</h4>
           </div>
-          <div className="side-bar__buttons" onClick={onClickProfile}>
+          {/* <div className="side-bar__buttons" onClick={onClickProfile}>
             {" "}
-            <IoPersonCircleOutline className="side-bar__button__icons" />{" "}
+            {" "}
             <h4 className="side-bar__button__labels">Profile</h4>
-          </div>
+          </div> */}
         </Sidebar>
         <div className="home-layout-content">
           <Header/>

@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { IoIosExit } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { FaBell } from "react-icons/fa";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -22,13 +23,19 @@ const Header = () => {
 				<img src={Logo} alt="key value logo" />
 			</div>
 			<div className="logout-section">
-				<div className="logout-icon" onClick={()=> navigate("notifications")}>
+				<div
+					className="logout-icon"
+					onClick={() => navigate("notifications")}
+				>
 					<FaBell className="bell-icon"></FaBell>
 				</div>
 				<div className="logout-icon" onClick={onLogout}>
 					<IoIosExit className="icon"></IoIosExit>
 				</div>
-				<div className="logee-data">
+				<div className="logout-icon" onClick={() => navigate("profile")}>
+					<IoPersonCircleOutline className="icon" />{" "}
+				</div>
+				<div className="logee-data" onClick={() => navigate("profile")}>
 					<div className="logee-data-name">{decode.name}</div>
 					<div className="logee-data-position">
 						{decode.position}
