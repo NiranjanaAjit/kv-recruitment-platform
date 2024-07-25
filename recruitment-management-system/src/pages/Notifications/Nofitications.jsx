@@ -24,7 +24,7 @@ const Notifications = () => {
     } catch (err) {
       console.error(err);
     }
-  }, 1000);
+  }, 1000000);
 
     return (
         <div className="notifications-container">

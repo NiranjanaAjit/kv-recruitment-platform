@@ -33,8 +33,15 @@ const referralApi = apiWithTag.injectEndpoints({
         body: payload
       }),
       invalidatesTags: ["REFERRAL_LIST"]
+    }),
+    getReferralByEmployee: builder.query({
+      query: (id) => ({
+        url: `/employee/referral/${id}`,
+        method: "GET",
+      }),
     })
+
   }),
 });
 
-export const { useReferralQuery, useCreateReferralMutation, useCheckReferralMutation, useEditReferralMutation } = referralApi;
+export const { useReferralQuery, useCreateReferralMutation, useCheckReferralMutation, useEditReferralMutation, useGetReferralByEmployeeQuery } = referralApi;
