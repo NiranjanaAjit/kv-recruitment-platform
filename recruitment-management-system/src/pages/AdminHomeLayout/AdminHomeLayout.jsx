@@ -40,7 +40,7 @@ const AdminHomeLayout = () => {
 
   return (
     <>
-      <div className="homeLayoutContainer">
+      <div className="home-layout-container">
         <Sidebar>
           <div className="side-bar__buttons" onClick={onEmpCreate}>
             <IoIosPersonAdd className="side-bar__button__icons" />
