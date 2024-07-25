@@ -36,8 +36,9 @@ const AdderInput = ({ options, label, handleListChange, value }) => {
     );
   };
   return (
-    <div>
-      <select className="adder-input-select" onChange={handleAddOption}>
+    <div className="input-group">
+        <label>{label}</label>
+      <select className="adder-input-select select-container" onChange={handleAddOption}>
         <option value="">{label}</option>
         {options?.map((option) => (
           <option key={option?.id} value={option?.value}>

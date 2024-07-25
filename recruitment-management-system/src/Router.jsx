@@ -127,6 +127,10 @@ function Router() {
               path: "notifications",
               element: <Notifications />,
             },
+            {
+              path: "profile",
+              element: <EmployeeProfile />,
+            },
           ],
         },
       ],
