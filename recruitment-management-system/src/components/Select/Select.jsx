@@ -4,6 +4,7 @@ const Select = ({
   name,
   options,
   placeholder,
+  disabled,
   value,
   className,
   handleChange,
@@ -18,6 +19,7 @@ const Select = ({
         onChange={handleChange}
         value={value}
         className={className ? className : "select-box"}
+        disabled={disabled}
       >
         <option value="" disabled>
           {placeholder}

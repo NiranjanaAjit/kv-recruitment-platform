@@ -57,7 +57,7 @@ function Router() {
             },
             {
               path: "referrals",
-              element: <Referrals />,
+              element: <AdminReferrals />,
             },
             {
               path: "jobDetails/:id",

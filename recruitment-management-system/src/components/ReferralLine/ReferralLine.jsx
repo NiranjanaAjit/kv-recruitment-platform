@@ -4,7 +4,7 @@ import { roleEnum } from "../../utils/role.enum";
 import { useEditReferralMutation } from "../../api/referralApi";
 import Select from "../Select/Select";
 import { referralStatusEnum } from "../../utils/referralStatus.enum";
-
+ 
 const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
   const role = useSelector((state) => state.auth.userRole);
   const [
@@ -17,6 +17,7 @@ const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
     value: value.toLowerCase(),
     display: value,
   }));
+  console.log(statusOptions);
   const bonusOptions = [
     { value: false, display: "Bonus pending" },
     { value: true, display: "Bonus given" },
@@ -27,17 +28,17 @@ const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
     job_position: referral?.job_position,
     referred_by: referral?.referred_by,
   };
-  if (role === roleEnum.ADMIN) {
-    columns = 5;
-  } else {
-    displayDetails = {
-      candidate_name: referral?.candidate_name,
-      job_position: referral?.job_position,
-      referred_by: referral?.referred_by,
-    };
-    displayDetails["status"] = referral?.status;
-    columns = 4;
-  }
+  // if (role === roleEnum.ADMIN) {
+  //   columns = 5;
+  // } else {
+  //   displayDetails = {
+  //     candidate_name: referral?.candidate_name,
+  //     job_position: referral?.job_position,
+  //     referred_by: referral?.referred_by,
+  //   };
+  //   displayDetails["status"] = referral?.status;
+  //   columns = 4;
+  // }
   const onStatusChange = (e) => {
     editReferral({
       id: referral?.id,
@@ -63,34 +64,30 @@ const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
     <>
       <div
         className="referral-line"
-        style={{ gridTemplateColumns: `repeat(${columns},1fr)` }}
+        style={{ gridTemplateColumns: `repeat(5,1fr)` }}
       >
         {Object.keys(displayDetails).map((key) => (
           <div key={key}>{displayDetails[key]}</div>
         ))}
-        {role === roleEnum.ADMIN ? (
-          <>
-            <Select
-              value={status}
-              handleChange={onStatusChange}
-              name="status"
-              options={statusOptions}
-            />
-            <Select
-              value={bonus}
-              handleChange={onBonusChange}
-              name="bonus"
-              options={bonusOptions}
-            />
-          </>
-        ) : candidateReferral ? (
-          <>
-            <div></div>
-          </>
-        ) : null}
+        <Select
+          value={status}
+          handleChange={onStatusChange}
+          name="status"
+          options={statusOptions}
+          status={statusOptions}
+          disabled={role !== roleEnum.ADMIN}
+        />
+        <Select
+          value={bonus}
+          handleChange={onBonusChange}
+          name="bonus"
+          options={bonusOptions}
+          disabled={role !== roleEnum.ADMIN}
+        />
       </div>
     </>
   );
 };
-
+ 
 export default ReferralLine;
+ 
