@@ -66,7 +66,7 @@ const JobDetails = () => {
   const onSubmit = () => {
     console.log(email, id, "Submit Email");
     navigate(`/${role?.toLowerCase()}/refer`, {
-      state: { jobId: id, email: email },
+      state: { jobId: id },
     });
   };
 
@@ -93,7 +93,8 @@ const JobDetails = () => {
     });
   };
   return (
-    <main className="jobdetail--container">
+  
+    <div className="jobdetail--container">
       <div className="jobdetail--header">
         <div className="header--title">
           <h1>{jobDetail?.position}</h1>
@@ -248,7 +249,7 @@ const JobDetails = () => {
           </Modal>
         </>
       )}
-    </main>
+    </div>
   );
 };
 

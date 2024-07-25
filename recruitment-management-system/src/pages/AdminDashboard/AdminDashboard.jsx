@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   return (
     <>
       <ContentHeader title={`${jobs?.length} Job Openings`}>
-        <button className="job-card-refer" onClick={(e) => onRefer(e, id)}>
+        <button className="job-card-refer-header" onClick={(e) => onRefer(e, id)}>
           Create Job
         </button>
       </ContentHeader>

@@ -84,8 +84,10 @@ const ReferCandidate = () => {
     checkReferral,
     { data: checkReferralData = {}, isSuccess: isCheckReferralSuccess },
   ] = useCheckReferralMutation();
-  const [createReferral, { data: createReferralData = [], isReferSuccess }] =
-    useCreateReferralMutation();
+  const [
+    createReferral,
+    { data: createReferralData = [], isSuccess: isReferSuccess },
+  ] = useCreateReferralMutation();
 
   let initialState = {};
   fields.map((field) => {
@@ -188,9 +190,9 @@ const ReferCandidate = () => {
       }
     }
   }, [checkReferralData, isCheckReferralSuccess]);
-  useEffect(() => {
-    console.log(toastList);
-  }, [toastList]);
+  // useEffect(() => {
+  //   console.log(toastList);
+  // }, [toastList]);
   useEffect(() => {
     if (isReferSuccess) {
       setToastList((toasts) => [

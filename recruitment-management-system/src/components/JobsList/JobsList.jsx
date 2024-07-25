@@ -21,20 +21,20 @@ const JobsList = ({ jobs }) => {
     label: "email",
     type: "text",
   };
-  const [valueState, setValueState] = useState({ email: "" });
-  const [errState, setErrState] = useState([]);
+  // const [valueState, setValueState] = useState({ email: "" });
+  // const [errState, setErrState] = useState([]);
 
-  const onFieldChange = (e) => {
-    setValueState((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // const onFieldChange = (e) => {
+  //   setValueState((state) => ({
+  //     ...state,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
 
-  const onSubmit = (id, email) => {
-    console.log(email, id, "Submit Email");
-    //TODO: Implement to backend
-  };
+  // const onSubmit = (id, email) => {
+  //   console.log(email, id, "Submit Email");
+  //   //TODO: Implement to backend
+  // };
 
   const [id, setId] = useState();
 
@@ -58,12 +58,13 @@ const JobsList = ({ jobs }) => {
                 }}
                 onRefer={(e, id) => {
                   e.stopPropagation();
+                  navigate(`/${role?.toLowerCase()}/refer`, {
+                    state: { jobId: id },
+                  });
                   console.log("refer button", id);
-                  setShowRef(!showRef);
-                  setId(id);
                 }}
               />
-              {showRef && (
+              {/* {showRef && (
                 <>
                   <Modal
                     onClose={() => {
@@ -101,7 +102,7 @@ const JobsList = ({ jobs }) => {
                     </div>
                   </Modal>
                 </>
-              )}
+              )} */}
             </>
           );
         })}

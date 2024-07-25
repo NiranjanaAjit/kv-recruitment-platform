@@ -15,11 +15,13 @@ import {
 import { useCreateJobDetailsMutation } from "../../api/jobApi";
 import AddNewPositionContent from "../../components/AddNewPositionModalContent/AddNewPositionContent";
 import { useNavigate } from "react-router-dom";
-
-
+import Toast from "../../components/Toast/Toast";
 
 const CreateJob = () => {
-  const [createJob] = useCreateJobDetailsMutation();
+  const [
+    createJob,
+    { data: createJobData = [], isSuccess: isCreateJobSuccess },
+  ] = useCreateJobDetailsMutation();
 
   const { data, isLoading } = useGetPositionListQuery();
 
@@ -90,6 +92,7 @@ const CreateJob = () => {
   // ];
 
   const [positionFields, setPositionFields] = useState([]);
+  const [toastList, setToastList] = useState([]);
   useEffect(() => {
     if (!isLoading) {
       let positionFieldsDummy = data.map((obj) => ({
@@ -156,7 +159,7 @@ const CreateJob = () => {
       initialState[field.name] = "";
     else initialState[field.name] = [];
   });
-  console.log(initialState)
+  console.log(initialState);
   const [valueState, setValueState] = useState(initialState);
   const [errState, setErrState] = useState(initialState);
   const onChange = (e, fieldName, maxLength = 100) => {
@@ -211,6 +214,19 @@ const CreateJob = () => {
     };
     createJob(payload);
   };
+  useEffect(() => {
+    if (isCreateJobSuccess) {
+      setToastList((toasts) => [
+        ...toasts,
+        {
+          type: "SUCCESS",
+          message:
+            "Successfully created the job opening.You will be redirected in a few seconds",
+        },
+      ]);
+      setTimeout(() => navigate(`/admin`), 3000);
+    }
+  }, [createJobData, isCreateJobSuccess]);
   return (
     <div className="create-new-job-container">
       <ContentHeader title="Create Job posting" />
@@ -235,8 +251,14 @@ const CreateJob = () => {
         onSubmit={handleSubmit}
         handleAddNew={addNewPosition}
         onCancel={() => navigate("/admin")}
-
       />
+      {toastList ? (
+        <div className="toast-container bottom-right">
+          {toastList?.map((toast, i) => (
+            <Toast key={i} type={toast?.type} message={toast?.message} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };
