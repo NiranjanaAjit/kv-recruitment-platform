@@ -29,10 +29,10 @@ const Header = () => {
 					<IoIosExit className="icon"></IoIosExit>
 				</div>
 				<div className="logee-data">
-					<span className="logee-data-name">{decode.name}</span>
-					<span className="logee-data-position">
+					<div className="logee-data-name">{decode.name}</div>
+					<div className="logee-data-position">
 						{decode.position}
-					</span>
+					</div>
 				</div>
 			</div>
 		</div>
