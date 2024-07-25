@@ -121,7 +121,7 @@ const Referrals = () => {
         </div>
       </section>
       <section className="referrals-section">
-        <section>
+        <section >
           <div className="fields-header referral-line">
             {titles.map((title) => (
               <p key={title}>{title}</p>

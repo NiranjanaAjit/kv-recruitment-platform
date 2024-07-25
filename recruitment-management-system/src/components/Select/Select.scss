@@ -7,14 +7,18 @@
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: var(--font-green);
+  background: #0b4c8c; /* Updated background color */
   padding: 0 0.5em;
   margin-right: 10px;
-  color: var(--pure-white);
+  color: #74B9FF; /* Updated text color */
   cursor: pointer;
   font-size: 1em;
-  width: 150px;
-  height: 3rem;
-  line-height: 3;
+  width: 150px; /* Adjust width if needed */
+  height: 2rem; /* Adjusted height */
+  line-height: 2rem; /* Ensure vertical centering */
   border-radius: 0.25em;
+}
+.filter{
+  font-weight: bold; /* Make the text bolder */
+  margin-left: 3px;
 }
