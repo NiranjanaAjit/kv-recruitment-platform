@@ -18,7 +18,7 @@ const JobCard = (props) => {
       onClick={(e) => props.onClick(e, id)}
     >
       <div className="job-card-upper-details">
-        <p className="job-card-position-id">Position ID: {id}</p>
+        <p className="job-card-position-id">Job ID: {id}</p>
         <p className="job-card-title">{position}</p>
         <p className="job-card-location">{location}</p>
 
