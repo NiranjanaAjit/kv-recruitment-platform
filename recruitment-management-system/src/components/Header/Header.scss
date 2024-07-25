@@ -6,6 +6,7 @@
   position: fixed;
   z-index: 2;
   left:0;
+  top:0;
   background-color: var(--sidebar-color);
   box-shadow: 5px 0px 15px 1px #1c212d44;
   display: flex;
@@ -27,16 +28,31 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     padding: 10px;
     color: var(--tertiary-color);
 
     .logee-data {
       display: flex;
-      flex-direction: column;
+      flex-direction: row ;
+      text-transform: capitalize;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 70px;
+      padding: 5px 0px;
+
 
       .logee-data-name {
         font-weight: 600;
         font-size: large;
+        text-align: left;
+      }
+
+      .logee-data-position {
+        text-align: left;
+
+
       }
     }
 
@@ -50,6 +66,12 @@
       .icon {
         height: 40px;
         width: 40px;
+
+      }
+
+      .bell-icon{
+        height: 30px;
+        width: 30px;
       }
     }
   }

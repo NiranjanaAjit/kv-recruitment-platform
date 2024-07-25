@@ -26,7 +26,7 @@ const EmployeeDashboard = () => {
   });
   return (
     <>
-      <ContentHeader title={`${jobs.length} Active Jobs`} />
+      <ContentHeader title={`${jobs.length} Job Openings`} />
       <JobsList jobs={jobs} />
     </>
   );
