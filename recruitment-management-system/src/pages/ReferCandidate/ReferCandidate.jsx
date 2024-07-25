@@ -49,22 +49,22 @@ const ReferCandidate = () => {
     {
       name: "email",
       label: "Candidate email",
-      maxLength: 30,
+      maxLength: 100,
     },
     {
       name: "name",
       label: "Full name",
-      maxLength: 40,
+      maxLength: 100,
     },
     {
       name: "experience",
       label: "Experience",
-      maxLength: 40,
+      maxLength: 100,
     },
     {
       name: "resume",
       label: "Link to candidate's resume file",
-      maxLength: 60,
+      maxLength: 500,
     },
     {
       name: "skills",
@@ -116,7 +116,7 @@ const ReferCandidate = () => {
   //   }
   // }, [isSuccess, data]);
 
-  const onChange = (e, fieldName, maxLength = 20) => {
+  const onChange = (e, fieldName, maxLength = 100) => {
     if (["skill"].includes(fieldName)) {
     } else {
       if (e.target.value.length > maxLength) {
