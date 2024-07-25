@@ -3,6 +3,7 @@ import { useGetReferralByEmployeeQuery } from "../../api/referralApi"
 import ContentHeader from "../../components/Content Header/ContentHeader"
 import GridRows from "../../components/GridRows/GridRows"
 import { jwtDecode } from "jwt-decode"
+import "../EmployeeProfile/EmployeeProfile.scss"
 
 const EmployeeProfile = ()=>{
     const rewardsHeaders={
@@ -10,7 +11,7 @@ const EmployeeProfile = ()=>{
         "name" : "Candidate Name",
         "positionName": "Position",
         "status": "Status",
-        "action": ""
+        "action": "Action"
 
     }
     const headers={

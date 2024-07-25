@@ -1,5 +1,5 @@
 .employeelist {
-  padding: 50px;
+  padding: 0px 40px;
   background-color: var(--main_background_off_grey);
   height: 100%;
 
@@ -9,19 +9,10 @@
       display: flex;
       justify-content: space-between;
     }
-    .header--buttons {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      height: 50px;
+    
+    
 
-      .create--button {
-        background-color: var(--main_background_off_grey);
-        border: 3px solid var(--green_button);
-        padding: 10px;
-        color: var(--green_button);
-        font-weight: bold;
-      }
+      
 
       .--button:hover {
         background-color: var(--green_button);
@@ -29,6 +20,33 @@
       }
     }
   }
+  
+  .header-container{
+    gap: 1300px;
+  }
+  .header--buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: 50px;
+    width: 1009x;
+    margin-right: -200px;
+    .create--button {
+      background-color: var(--main_background_off_grey);
+      border: 3px solid var(--sidebar-color);
+      padding: 10px;
+      color: var(--sidebar-color);
+      font-weight: bold;
+    }
+
+    .create--button:hover{
+      background-color: var(--sidebar-color);
+      border: 3px solid var(--sidebar-color);
+      padding: 10px;
+      color: var(--primary-color);
+      font-weight: bold;
+      cursor: pointer;
+    }
 }
 
 .Probation {
@@ -36,6 +54,11 @@
   background-color: var(--yellow);
   border: 1px solid var(--yellow);
 }
+
+
+
+  
+
 
 .Active {
   color: #ffffff;
@@ -73,7 +96,7 @@
 
     .modal--deletebutton {
       width: 100px;
-      height: 50px;
+      height: 100px;
       margin: 5px;
       background-color: var(--delete_button);
     }
