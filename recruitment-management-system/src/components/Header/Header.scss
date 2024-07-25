@@ -34,13 +34,25 @@
 
     .logee-data {
       display: flex;
-      flex-direction: column;
+      flex-direction: row ;
       text-transform: capitalize;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 70px;
+      padding: 5px 0px;
 
 
       .logee-data-name {
         font-weight: 600;
         font-size: large;
+        text-align: left;
+      }
+
+      .logee-data-position {
+        text-align: left;
+
+
       }
     }
 
