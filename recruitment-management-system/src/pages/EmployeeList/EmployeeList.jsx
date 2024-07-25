@@ -14,6 +14,7 @@ import {
   useDeleteEmployeeListByIdMutation,
   useGetEmployeeListQuery,
 } from "../../api/employeeApi";
+import ContentHeader from "../../components/Content Header/ContentHeader";
 
 const EmployeeList = () => {
   let { id } = useParams();
@@ -132,23 +133,19 @@ const EmployeeList = () => {
 
   return (
     <>
-      <main className="employeelist">
-        <div className="employeelist--content">
-          <div className="employeelist--content--header">
-            <div className="header--title">
-              <h1>Employee List</h1>
-              {/* TODO: ADD FILTER */}
-            </div>
-            <div className="header--buttons">
-              <Button
+          <ContentHeader title={"Employee List"} children={<div className="header--buttons">
+            <div className="button-container"><Button
                 className="create--button"
                 text="Create Employee"
                 handleSubmit={() => {
                   navigate("/admin/create-employee");
                 }}
-              ></Button>
-            </div>
-          </div>
+              ></Button></div>
+              
+            </div>}/>
+      <main className="employeelist">
+        <div className="employeelist--content">
+          
           <GridRows
             Headers={empHeaders}
             Details={empDetails}
