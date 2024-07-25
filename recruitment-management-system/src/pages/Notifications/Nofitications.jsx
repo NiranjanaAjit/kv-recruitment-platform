@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useGetNotificationsQuery } from "../../api/notificationApi";
 import "./Notifications.scss";
+import ContentHeader from "../../components/Content Header/ContentHeader";
 
 const Notifications = () => {
-
   const [messages, setMessages] = useState("");
   useEffect(() => {
     console.log(messages);
@@ -20,21 +20,24 @@ const Notifications = () => {
       console.log("data:", data);
       const notifications = data?.notifications;
       setMessages(notifications?.map((notification) => notification.message));
-
     } catch (err) {
       console.error(err);
     }
   }, 1000000);
+  console.log(token);
+  const { data: notifs } = useGetNotificationsQuery(token);
 
-    return (
-        <div className="notifications-container">
-          {messages && messages?.map((message, index) => (
-            <div key={index} className="notification-message">
-              {message}
-            </div>
-          ))}
-        </div>
-      );
+  return (
+    <div className="notifications-container">
+      <ContentHeader title="Notifications" />
+      {messages &&
+        messages?.map((message, index) => (
+          <div key={index} className="notification-message">
+            {message}
+          </div>
+        ))}
+    </div>
+  );
 };
 
 export default Notifications;

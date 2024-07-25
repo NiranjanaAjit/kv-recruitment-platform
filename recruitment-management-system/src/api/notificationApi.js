@@ -3,8 +3,9 @@ import apiWithTag from "./baseApi";
 const notificationApi = apiWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getNotifications: builder.query({
-      query: () => "/notifications",
+      query: (payload) => "/notifications",
       providesTags: ["NOTIFICATION_LIST"],
+      body:payload,
       keepUnusedDataFor: 2,
     }),
   }),
