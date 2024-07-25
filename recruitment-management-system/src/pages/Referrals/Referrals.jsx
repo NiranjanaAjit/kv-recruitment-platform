@@ -7,6 +7,7 @@ import "./Referrals.scss";
 import { useReferralQuery } from "../../api/referralApi";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import ContentHeader from "../../components/Content Header/ContentHeader";
 
 const Referrals = () => {
   const { data: data, isSuccess: isSuccess } = useReferralQuery();
@@ -73,7 +74,8 @@ const Referrals = () => {
   return (
     <>
       <section className="section-header">
-        <p className="title">Referrals</p>
+        <ContentHeader title={"Referrals"}/>
+        <p className="title"></p>
         <div className="header-right">
           <Select
             name="filter"
