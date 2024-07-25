@@ -66,7 +66,7 @@ const JobDetails = () => {
   const onSubmit = () => {
     console.log(email, id, "Submit Email");
     navigate(`/${role?.toLowerCase()}/refer`, {
-      state: { jobId: id, email: email },
+      state: { jobId: id },
     });
   };
 
