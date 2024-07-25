@@ -11,6 +11,11 @@ import { jwtDecode } from "jwt-decode";
 const Referrals = () => {
   const { data: data, isSuccess: isSuccess } = useReferralQuery();
   console.log(data);
+  // const [searchOptions, setSearchOptions] = useState({
+  //   option: "",
+  //   value: "",
+  // });
+  const [filterBy, setFilterBy] = useState("");
   const [referDetails, setReferDetails] = useState([]);
   const token = localStorage.getItem("accessToken");
   const decodedData = jwtDecode(token);
@@ -24,7 +29,6 @@ const Referrals = () => {
         const position = jobOpening?.position;
         const referrer = Object.referrer;
         const referee = Object.referree;
-        console.log(referrer, position, jobOpening, "hey");
 
         return {
           candidate_name: referee.name,
@@ -44,6 +48,28 @@ const Referrals = () => {
     { value: "email", display: "Candidate email" },
     { value: "referral_id", display: "Referral ID" },
   ];
+
+  const search = (e) => {
+    const text = e.target.value;
+    console.log(text);
+  };
+
+  const onFilterChange = (e) => {
+    console.log("Monkey");
+    console.log(e);
+    const text = e.target.value;
+
+    console.log(text, "hey");
+    // setSearchOptions((searchOptions) => ({
+    //   ...searchOptions,
+    //   option: e.target.value,
+    // }));
+    setFilterBy(text);
+  };
+
+  const valueChange = (e) => {
+    console.log(e.taget.value);
+  };
   return (
     <>
       <section className="section-header">
@@ -53,8 +79,9 @@ const Referrals = () => {
             name="filter"
             placeholder="Filter by"
             options={filterOptions}
+            handleChange={onFilterChange}
           />
-          <Searchbar />
+          <Searchbar onSubmit={search} onChange={valueChange} />
         </div>
       </section>
       <section className="referrals-section">
