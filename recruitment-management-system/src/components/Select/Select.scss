@@ -1,20 +1,83 @@
+// .select-box {
+//   border-radius: 5px;
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   -ms-appearance: none;
+//   appearance: none;
+//   outline: 0;
+//   box-shadow: none;
+//   border: 0 !important;
+//   background: rgb(224, 224, 224);
+//   padding: 0 0.5em;
+//   margin-right: 10px;
+//   color: var(--pure-white);
+//   cursor: pointer;
+//   font-size: 1em;
+//   width: 150px;
+//   height: 3rem;
+//   line-height: 3;
+//   border-radius: 22px;
+//   &.green-background {
+//     background: #2ecc71;
+//   }
+// }
+
+
+
 .select-box {
-  border-radius: 5px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background: var(--font-green);
-  padding: 0 0.5em;
-  margin-right: 10px;
-  color: var(--pure-white);
-  cursor: pointer;
-  font-size: 1em;
-  width: 150px;
-  height: 3rem;
-  line-height: 3;
-  border-radius: 0.25em;
+  background-color: rgb(236, 227, 227);
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+ 
+  
 }
+.select-box-green-background {
+  background: #9ae4b9; /* Green for ACCEPTED */
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.select-box-yellow-background {
+  background: #e4d8ab; /* Yellow for SUBMITTED */
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.select-box-blue-background {
+  background: #b4d9f1; /* Blue for INTERVIEWED */
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.select-box-red-background {
+  background: #f7ccc7; /* Red for DECLINED */
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.select-box-orange-background {
+  background: #f1cfb0; /* Orange for UNDER REVIEW */
+  padding: 10px;
+ 
+  border-radius: 22px;
+  border: 1px solid rgb(255, 255, 255);
+}
+// select:focus {
+//   outline: none;
+// }
+// select {
+//   border: none;
+//   color: var(--black-variant);
+//   background-color: var(--secondary);
+//   width: 100%;
+// }

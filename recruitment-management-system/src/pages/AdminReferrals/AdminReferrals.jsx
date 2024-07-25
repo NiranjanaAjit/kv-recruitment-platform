@@ -60,7 +60,7 @@ const AdminReferrals = () => {
         <div className="header-right">
           <Select
             name="filter"
-            placeholder="Filter by"
+            placeholder="Search by  "
             options={filterOptions}
           />
           <Searchbar />

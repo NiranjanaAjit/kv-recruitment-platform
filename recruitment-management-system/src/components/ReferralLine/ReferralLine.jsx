@@ -17,6 +17,7 @@ const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
     value: value.toLowerCase(),
     display: value,
   }));
+  console.log(statusOptions);
   const bonusOptions = [
     { value: false, display: "Bonus pending" },
     { value: true, display: "Bonus given" },
@@ -75,6 +76,7 @@ const ReferralLine = ({ referral, fieldCount, candidateReferral }) => {
               handleChange={onStatusChange}
               name="status"
               options={statusOptions}
+              status={statusOptions}
             />
             <Select
               value={bonus}

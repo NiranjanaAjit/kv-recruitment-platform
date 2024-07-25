@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import ReferralLine from "../../components/ReferralLine/ReferralLine";
 import Select from "../../components/Select/Select";
+import ContentHeader from "../../components/Content Header/ContentHeader"
 import Searchbar from "../../components/Searchbar/Searchbar";
 import "./Referrals.scss";
 import { useReferralQuery } from "../../api/referralApi";
@@ -41,24 +42,27 @@ const Referrals = () => {
   const titles = ["Candidate name", "Job Position", "Referred by", "Status"];
 
   const filterOptions = [
+    { value: "All", display: "All" },
     { value: "email", display: "Candidate email" },
     { value: "referral_id", display: "Referral ID" },
   ];
   return (
     <>
-      <section className="section-header">
+
+      <section className="header-container">
+      <ContentHeader title={Referrals}/>
+
         <p className="title">Referrals</p>
         <div className="header-right">
           <Select
             name="filter"
-            placeholder="Filter by"
+            placeholder="Search by"
             options={filterOptions}
           />
           <Searchbar />
         </div>
-      </section>
-      <section className="referrals-section">
-        <section>
+
+        <section className="referrals-section">
           <div
             className="fields-header referral-line"
             style={{ gridTemplateColumns: `repeat(${titles?.length},1fr)` }}
